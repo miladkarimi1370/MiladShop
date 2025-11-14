@@ -18,7 +18,9 @@ export default function MenuTemplateWithSubMenu({ text, myHref, whichPart }) {
         <Box
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            sx={{ position: "relative" }}
+            sx={{ position: "relative" , "&:hover" : {
+                color : "tomato" 
+            }  , transition : "all 0.3s"}}
         >
             <MenuItem
                 ref={myAnchor}

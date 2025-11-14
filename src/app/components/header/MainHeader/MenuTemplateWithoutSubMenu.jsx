@@ -5,6 +5,7 @@ export default function MenuTemplateWithoutSubMenu({ text, myHref, LastChild }) 
         <>
             <MenuItem disableRipple component={NextLink} href={myHref} sx={{
                 width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginBlock: "0px", "&:hover": {
+                    color: "tomato",
                     backgroundColor: "inherit"
                 }
             }}>

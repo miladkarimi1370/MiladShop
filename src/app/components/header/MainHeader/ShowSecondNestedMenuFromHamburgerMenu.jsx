@@ -1,6 +1,7 @@
+
 "use client";
 import NextLink from "next/link";
-import { ListItemText, MenuItem, MenuList, Paper, Popper } from "@mui/material";
+import { ListItemText, MenuItem, MenuList, Paper, Popper, Fade } from "@mui/material";
 
 export default function ShowSecondNestedMenuFromHamburgerMenu({ desAncho, part, open }) {
     const parts = {
@@ -34,36 +35,50 @@ export default function ShowSecondNestedMenuFromHamburgerMenu({ desAncho, part, 
             open={open}
             anchorEl={desAncho}
             placement="left-start"
-            sx={{
-                zIndex: 1300,
-
-            }}
+            transition
+            modifiers={[
+                { name: "offset", options: { offset: [0, 0] } },
+                { name: "preventOverflow", options: { padding: 8 } },
+                { name: "flip", enabled: false },
+            ]}
+            sx={{ zIndex: 1300 }}
         >
-            <Paper elevation={2} sx={{ width: 300, maxWidth: "100%", transform: "translateX(2px) translateY(-7px)" }}>
-                <MenuList sx={{ width: "100%" }}>
-                    {parts[part].map((item) => (
-                        <MenuItem
-                            key={item.id}
-                            disableRipple
-                            component={NextLink}
-                            href={item.href}
-                            sx={{
-                                width: "100%", "&:hover": {
-                                    backgroundColor: "inherit", color: "tomato" , 
-                                    transition : "all 0.2s"
-                                }
-                            }}
-                        >
-                            <ListItemText
-                                primary={item.title}
-                                slotProps={{
-                                    primary: { sx: { fontSize: "14px" } },
-                                }}
-                            />
-                        </MenuItem>
-                    ))}
-                </MenuList>
-            </Paper>
+            {({ TransitionProps }) => (
+                <Fade {...TransitionProps} timeout={200}>
+                    <Paper
+                        elevation={2}
+                        sx={{
+                            width: 300,
+                            maxWidth: "100%",
+                            transform: "translateX(0px) translateY(-7px)",
+                        }}
+                    >
+                        <MenuList sx={{ width: "100%" }}>
+                            {parts[part].map((item) => (
+                                <MenuItem
+                                    key={item.id}
+                                    disableRipple
+                                    component={NextLink}
+                                    href={item.href}
+                                    sx={{
+                                        width: "100%",
+                                        "&:hover": {
+                                            backgroundColor: "inherit",
+                                            color: "tomato",
+                                            transition: "all 0.2s",
+                                        },
+                                    }}
+                                >
+                                    <ListItemText
+                                        primary={item.title}
+                                        slotProps={{ primary: { sx: { fontSize: "14px" } } }}
+                                    />
+                                </MenuItem>
+                            ))}
+                        </MenuList>
+                    </Paper>
+                </Fade>
+            )}
         </Popper>
     );
 }
