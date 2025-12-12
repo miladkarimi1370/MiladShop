@@ -27,7 +27,7 @@ export default function MyTopHeader() {
                 justifyContent: "start",
                 alignItems: "center",
                 backgroundColor: "#000000",
-                height: "5vh"
+
             }}>
                 <ShowLogo />
                 <Box sx={{ display: "flex", justifyContent: "end", alignItems: "center", width: "100%", height: "100%" }}>
@@ -47,7 +47,9 @@ export default function MyTopHeader() {
                     justifyContent: "start",
                     alignItems: "center",
                     backgroundColor: "#000000",
-                    height: "5vh"
+                    height: "40px",
+
+
                 }}
             >
                 <Container

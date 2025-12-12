@@ -1,4 +1,4 @@
-
+"use client";
 import { Box, Container } from "@mui/material";
 
 import PopularityHeader from "./PopularityHeader";

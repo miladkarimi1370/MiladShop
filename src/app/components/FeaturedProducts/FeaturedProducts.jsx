@@ -1,3 +1,4 @@
+"use client"
 import { Box, Container } from "@mui/material"
 import FeaturedHeader from "./FeaturedHeader"
 import TemplateComponentForShowFeaturedCards from "./TemplateComponentForShowFeaturedCard"

@@ -9,11 +9,6 @@ import OurCategories from "./components/ourCategories/OurCategories";
 import Popularity from "./components/popularity/Popularity";
 import ShowPosts from "./components/posts/ShowPosts";
 
-
-
-
-
-
 export default function Home() {
 
 

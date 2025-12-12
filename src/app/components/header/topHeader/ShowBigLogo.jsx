@@ -4,9 +4,9 @@ export default function ShowBigLogo() {
     return (
         <Box
             component={"img"}
-            src="images/logo.png"
+            src="/images/logo.png"
             alt="logo.png"
-            sx={{ width: "60px" }}
+            sx={{ width: "60px" , height : "60px" }}
         >
 
         </Box>

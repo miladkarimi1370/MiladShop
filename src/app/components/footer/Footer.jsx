@@ -45,7 +45,7 @@ export default function Footer() {
                   <ListSubheader
                     sx={{
                       fontWeight: "bold",
-                      fontSize: "1.1rem",
+                      fontSize: "16px",
                       color: "#222",
                       bgcolor: "transparent",
                       mb: 1,
@@ -119,7 +119,7 @@ export default function Footer() {
                   <ListSubheader
                     sx={{
                       fontWeight: "bold",
-                      fontSize: "1.1rem",
+                      fontSize: "16px",
                       color: "#222",
                       bgcolor: "transparent",
                       mb: 1,
@@ -145,7 +145,12 @@ export default function Footer() {
                         "&:hover": { color: "tomato", bgcolor: "transparent" },
                       }}
                     >
-                      <ListItemText primary={city} />
+                      <ListItemText
+                        primary={city}
+                        primaryTypographyProps={{
+                          fontSize: "14px",
+                        }}
+                      />
                     </ListItemButton>
                   )
                 )}
@@ -159,7 +164,7 @@ export default function Footer() {
                   <ListSubheader
                     sx={{
                       fontWeight: "bold",
-                      fontSize: "1.1rem",
+                      fontSize: "16px",
                       color: "#222",
                       bgcolor: "transparent",
                       mb: 1,
@@ -191,7 +196,12 @@ export default function Footer() {
                       "&:hover": { color: "tomato", bgcolor: "transparent" },
                     }}
                   >
-                    <ListItemText primary={item} />
+                    <ListItemText
+                      primary={item}
+                      primaryTypographyProps={{
+                        fontSize: "14px",
+                      }}
+                    />
                   </ListItemButton>
                 ))}
               </List>
@@ -204,7 +214,7 @@ export default function Footer() {
                   <ListSubheader
                     sx={{
                       fontWeight: "bold",
-                      fontSize: "1.1rem",
+                      fontSize: "16px",
                       color: "#222",
                       bgcolor: "transparent",
                       mb: 1,
@@ -253,7 +263,6 @@ export default function Footer() {
                   />
                 </Box>
 
-                {/* آیکون‌های شبکه‌های اجتماعی */}
                 <Box
                   sx={{
                     display: "flex",
@@ -283,7 +292,6 @@ export default function Footer() {
 
       <Divider />
 
-      {/* کپی‌رایت */}
       <Box
         sx={{
           width: "100vw",

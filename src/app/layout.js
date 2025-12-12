@@ -1,3 +1,4 @@
+
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "./theme/ThemeRegistery";

@@ -1,3 +1,4 @@
+"use client";
 import { Box, Container } from "@mui/material";
 
 import ShowPostsHeader from "./ShowPostsHeader";
