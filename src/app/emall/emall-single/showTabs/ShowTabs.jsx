@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import { useState } from "react";
 import Descriptions from "./descriptions/Descriptions";
 import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
+import ShowTable from "./table/ShowTable";
+import Reviews from "./reviews/Reviews";
 
 export default function BasicTabs() {
     const [value, setValue] = useState(0);
@@ -25,8 +27,8 @@ export default function BasicTabs() {
 
             </Box>
             {value === 0 && (<Descriptions />)}
-            {value === 1 && <div>Content 2</div>}
-            {value === 2 && <div>Content 3</div>}
+            {value === 1 && (<ShowTable />)}
+            {value === 2 && (<Reviews />)}
         </>
     );
 }

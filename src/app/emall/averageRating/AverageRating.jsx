@@ -1,4 +1,4 @@
-"use client";
+
 import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
 import { Box, Checkbox, FormControlLabel, FormGroup, Rating, Typography } from "@mui/material";
 

@@ -10,6 +10,9 @@ const theme = createTheme({
     palette: {
         myWhite: {
             main: "#ffff"
+        } , 
+        myGrey : {
+            main : "#cecece"
         }
     }
 });
