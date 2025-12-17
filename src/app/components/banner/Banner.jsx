@@ -1,8 +1,9 @@
-import theme from "@/app/theme/theme";
+
 import ChangeNumbersToPersina, { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
 import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
+
+import NextLink from "../nextLink/NextLink";
 
 export default function Banner() {
     return (
@@ -72,7 +73,7 @@ export default function Banner() {
                     </Typography>
                     <Typography
                         variant="body1"
-                        component={Link}
+                        component={NextLink}
                         href={""}
                         sx={{ borderBottom: "1px solid #000", textAlign: "center", mt: 1 }}
                     >
