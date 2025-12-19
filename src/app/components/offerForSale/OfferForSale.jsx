@@ -1,17 +1,27 @@
-"use client"
+
 import { Box, Container } from "@mui/material";
 
 
 import TemplateComponentForPictures from "./TemplateComponentForPictures";
-
-export default function OfferForSale() {
-    const infoOffer = [
-        { id: 1, myHref: "", mySrc: "/images/offerForSale/banner-1.jpg", title: "تا 30 درصد تخیف برای بانوان" },
-        { id: 2, myHref: "", mySrc: "/images/offerForSale/banner-2.jpg", title: "فروش ویژه کتانی ، شروع قیمت از 400000  تومان" },
-        { id: 3, myHref: "", mySrc: "/images/offerForSale/banner-3.jpg", title: "کالکشن پائیزه برای آقایان" },
+import { createClient } from "@supabase/supabase-js";
 
 
-    ]
+export default async function OfferForSale() {
+
+
+    const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    )
+
+
+
+    const { data, error } = await supabase
+        .from('offer_for_sale')
+        .select('*')
+  
+
+
     return (
         <>
             <Container maxWidth={"fluid"} sx={{ display: "flex", justifyContent: "center", alignItems: "center", my: "3vh" }}>
@@ -22,9 +32,9 @@ export default function OfferForSale() {
                 }}>
                     <Box component={"div"} sx={{ width: "100%", display: "flex", justifyContent: "space-evenly", alignItems: "center", flexWrap: "wrap" }}>
                         {
-                            infoOffer.map((item) => {
+                            data.map((item) => {
                                 return (
-                                    <TemplateComponentForPictures key={item.id} href={item.myHref} title={item.title} mySrc={item.mySrc} />
+                                    <TemplateComponentForPictures key={item.id} href={item.myHref} title={item.title} mySrc={item.image_url} />
                                 )
                             })
                         }

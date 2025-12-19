@@ -17,7 +17,7 @@ import ChangeNumbersToPersina from '@/tools/changeNumbersToPersian';
 
 export default function TemplateComponentForShowSlider({ sliders }) {
 
-    console.log(sliders);
+ 
 
     return (
         <>
