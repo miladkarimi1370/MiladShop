@@ -4,6 +4,7 @@ import DeadLine from "./components/deadline/Deadline";
 import FeaturedProducts from "./components/FeaturedProducts/FeaturedProducts";
 import InfoBeforeBuy from "./components/infoBeforeBuy/InfoBeforeBuy";
 import MainSlider from "./components/mainSlider/MainSlider";
+
 import OfferForSale from "./components/offerForSale/OfferForSale";
 import OurCategories from "./components/ourCategories/OurCategories";
 import Popularity from "./components/popularity/Popularity";
@@ -15,6 +16,7 @@ export default function Home() {
 
   return (
     <>
+
       <MainSlider />
       <OfferForSale />
       <OurCategories />
