@@ -12,22 +12,9 @@ import TemplateComponentForShowClothes from './TemplateComponentForShowClothes';
 
 
 
-const OurCategoriesSlider = () => {
 
-    const infoCategories = [
-        { id: 1, title: "آقایان ", count: 31, srcOur: "/images/ourCategoriesImages/4-cat.jpg", myHref: "" },
-        { id: 2, title: "بانوان ", count: 38, srcOur: "/images/ourCategoriesImages/1-cat.jpg", myHref: "" },
-        { id: 3, title: "لباس راحتی و خواب ", count: 5, srcOur: "/images/ourCategoriesImages/6-cat.jpg", myHref: "" },
-        { id: 4, title: "اکسسوری ها ", count: 15, srcOur: "/images/ourCategoriesImages/5-cat.jpg" },
-        { id: 5, title: "دورس و البسه نخی ", count: 9, srcOur: "/images/ourCategoriesImages/3-cat.jpg", myHref: "" },
-        { id: 6, title: "کفش و کتانی ", count: 2, srcOur: "/images/ourCategoriesImages/2-cat.jpg", myHref: "" },
-        { id: 7, title: "آقایان ", count: 31, srcOur: "/images/ourCategoriesImages/4-cat.jpg", myHref: "" },
-        { id: 8, title: "بانوان ", count: 38, srcOur: "/images/ourCategoriesImages/1-cat.jpg", myHref: "" },
-        { id: 9, title: "لباس راحتی و خواب ", count: 5, srcOur: "/images/ourCategoriesImages/6-cat.jpg", myHref: "" },
-        { id: 10, title: "اکسسوری ها ", count: 15, srcOur: "/images/ourCategoriesImages/5-cat.jpg" },
-        { id: 11, title: "دورس و البسه نخی ", count: 9, srcOur: "/images/ourCategoriesImages/3-cat.jpg", myHref: "" },
-        { id: 12, title: "کفش و کتانی ", count: 2, srcOur: "/images/ourCategoriesImages/2-cat.jpg", myHref: "" },
-    ]
+const OurCategoriesSlider = ({ categoryData }) => {
+
 
     const isXs = useMediaQuery(theme.breakpoints.only("xs"));
     const isSm = useMediaQuery(theme.breakpoints.only("sm"));
@@ -51,10 +38,10 @@ const OurCategoriesSlider = () => {
                 className="mySwiper"
                 style={{ cursor: "pointer", height: "100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
             >
-
-                {[...infoCategories].map((item) => {
+                
+                {[...categoryData].map((item) => {
                     return <SwiperSlide style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                        <TemplateComponentForShowClothes key={item.id} href={item.myHref} mySrc={item.srcOur} title={item.title} count={item.count} />
+                        <TemplateComponentForShowClothes key={item.id} href={"milad"} mySrc={item.image_url} title={item.title} count={item.category_count} />
                     </SwiperSlide>
 
                 })}
