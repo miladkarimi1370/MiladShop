@@ -4,25 +4,21 @@ import { Box, Container } from "@mui/material";
 
 import TemplateComponentForPictures from "./TemplateComponentForPictures";
 import { createClient } from "@supabase/supabase-js";
-import ApiSSRForOfferForSale from "@/utils/GetSSRForOfferForSale";
+
 
 
 export default async function OfferForSale() {
-    const myData = await ApiSSRForOfferForSale().then((res) => res.json());
 
 
+    const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    )
 
 
-    // const supabase = createClient(
-    //     process.env.NEXT_PUBLIC_SUPABASE_URL,
-    //     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    // )
-
-
-
-    // const { data, error } = await supabase
-    //     .from('offer_for_sale')
-    //     .select('*')
+    const { data, error } = await supabase
+        .from('offer_for_sale')
+        .select('*')
 
 
 
@@ -36,7 +32,7 @@ export default async function OfferForSale() {
                 }}>
                     <Box component={"div"} sx={{ width: "100%", display: "flex", justifyContent: "space-evenly", alignItems: "center", flexWrap: "wrap" }}>
                         {
-                            myData.map((item) => {
+                            data.map((item) => {
                                 return (
                                     <TemplateComponentForPictures key={item.id} href={item.myHref} title={item.title} mySrc={item.image_url} />
                                 )

@@ -4,6 +4,9 @@ import Link from "next/link";
 import { Box, Card, Typography } from "@mui/material";
 
 export default function TemplateComponentsForShowPosts({ mySrc, href, title, description, date }) {
+
+  
+
   return (
     <Link
       href={href || "#"}
@@ -14,6 +17,7 @@ export default function TemplateComponentsForShowPosts({ mySrc, href, title, des
         sx={{
           maxWidth: 350,
           margin: "auto",
+
           borderRadius: 2,
           overflow: "hidden",
           boxShadow: "none",   // ← shadow حذف شد
@@ -23,7 +27,7 @@ export default function TemplateComponentsForShowPosts({ mySrc, href, title, des
         }}
       >
         {/* تصویر */}
-        <Box sx={{ position: "relative", width: "100%", height: { xs: 180, sm: 200, md: 220 } }}>
+        <Box sx={{ position: "relative", width: "100%", height: { xs: 220, sm: 220, md: 240 } }}>
           <Image src={mySrc} alt={title} fill style={{ objectFit: "cover" }} priority />
           <Box
             sx={{
@@ -57,7 +61,7 @@ export default function TemplateComponentsForShowPosts({ mySrc, href, title, des
           </Typography>
 
           <Typography variant="body2" sx={{ color: "#555", fontSize: "0.85rem", lineHeight: 1.5 }}>
-            {description}
+            {description.length > 100 ? description.slice(0, 100) + "..." : description}
           </Typography>
         </Box>
       </Card>

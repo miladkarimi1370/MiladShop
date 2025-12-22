@@ -16,6 +16,7 @@ export default function TemplateComponentForShowFeaturedCards({ title, href, src
     const [isHover, setIsHover] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(null);
 
+    
     const currentIndex = isHover
         ? 1 // وقتی موس روی کارت هست
         : selectedIndex !== null
@@ -52,7 +53,7 @@ export default function TemplateComponentForShowFeaturedCards({ title, href, src
                                 onMouseEnter={() => setIsHover(true)}
                                 onMouseLeave={() => setIsHover(false)}
                                 component="img"
-                                image={src[currentIndex]}
+                                image={src[currentIndex].image_url}
                                 alt={title}
                                 sx={{ objectFit: "cover", transition: "all 0.3s ease" }}
                             />

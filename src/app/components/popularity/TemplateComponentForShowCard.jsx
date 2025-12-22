@@ -10,9 +10,13 @@ import ChangeNumbersToPersina from "@/tools/changeNumbersToPersian";
 import ColorsForProducts from "./ColorsForProducts";
 import { useState } from "react";
 
-export default function TemplateComponentForShowCard({ title, href, src, price, colorsOfProduct }) {
+export default function TemplateComponentForShowCard({ id, title, href, src, price, colorsOfProduct }) {
     const [isHover, setIsHover] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(null);
+
+
+
+
 
     const currentIndex = isHover
         ? 1 // وقتی موس روی کارت هست
@@ -48,7 +52,8 @@ export default function TemplateComponentForShowCard({ title, href, src, price, 
                             onMouseEnter={() => setIsHover(true)}
                             onMouseLeave={() => setIsHover(false)}
                             component="img"
-                            image={src[currentIndex]}
+                            key={id}
+                            image={src[currentIndex].image_url}
                             alt={title}
                             sx={{ objectFit: "cover", transition: "all 0.3s ease" }}
                         />

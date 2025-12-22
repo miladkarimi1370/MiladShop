@@ -1,18 +1,31 @@
-"use client"
+
 import { Box, Container } from "@mui/material"
 import FeaturedHeader from "./FeaturedHeader"
 import TemplateComponentForShowFeaturedCards from "./TemplateComponentForShowFeaturedCard"
+import { createClient } from "@supabase/supabase-js"
 
-export default function FeaturedProducts() {
+export default async function FeaturedProducts() {
 
-    const inforPopularity = [
-        { id: 1, title: "اوت فیت مردانه", price: "4700000", colors: ["burlywood", "burlywood", "brown"], src: ["/images/featuredProducts/1-1.jpg", "images/featuredProducts/1-2.jpg", "images/featuredProducts/1-3.jpg"], myHref: "" },
-        { id: 2, title: "عینک دودی گالانت ", price: "1350000", colors: ["green", "brown"], src: ["/images/featuredProducts/2-1.jpg", "images/featuredProducts/2-2.jpg"], myHref: "" },
-        { id: 3, title: "اوت فیت لانگ زنانه", price: "3200000", colors: ["skyblue", "green"], src: ["/images/featuredProducts/3-1.jpg", "images/featuredProducts/3-2.jpg"], myHref: "" },
-        { id: 4, title: "شلوار اسلیم فیت", price: "900000", colors: ["skyblue", "brown"], src: ["/images/featuredProducts/4-1.jpg", "images/featuredProducts/4-2.jpg"], myHref: "" },
+    const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    )
 
 
-    ]
+    const { data, error } = await supabase
+        .from('milad-shop-products')
+        .select(`
+            id ,
+            name , 
+            price , 
+            colors ,
+            milad-shop-product-images (
+            id , 
+            image_url
+            ) 
+            `)
+        .eq("discount", true)
+
 
     return (
         <>
@@ -21,11 +34,12 @@ export default function FeaturedProducts() {
                     <FeaturedHeader />
                     <Box sx={{ width: "100%", height: "auto", display: "flex", justifyContent: "space-evenly", alignItems: "center", flexWrap: "wrap" }}>
                         {/* کامپونتنت اصلی  */}
-                        {inforPopularity.map((item) => {
+                        {data.map((item) => {
                             return (
-                                <TemplateComponentForShowFeaturedCards key={item.id} title={item.title} href={item.myHref} price={item.price} colorsOfProduct={item.colors} src={item.src} />
+                                <TemplateComponentForShowFeaturedCards key={item.id} title={item.name} href={"milad"} price={item.price} colorsOfProduct={item.colors} src={item['milad-shop-product-images']} />
                             )
                         })}
+
 
                         {/* کامپونتنت اصلی  */}
 

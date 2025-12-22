@@ -4,8 +4,21 @@ import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
 
 import NextLink from "../nextLink/NextLink";
+import { createClient } from "@supabase/supabase-js";
 
-export default function Banner() {
+export default async function Banner() {
+
+
+    const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+
+    const { data: myData } = await supabase.from("banner").select("*");
+
+
+
+
     return (
         <Container maxWidth="lg" sx={{ mt: 4 }}>
             <Box sx={{
@@ -30,9 +43,9 @@ export default function Banner() {
                     textAlign: "center",
                     gap: 1
                 }}>
-                    <Typography variant="h5" sx={{ color: "#000" }}>فروش بزرگ</Typography>
+                    <Typography variant="h5" sx={{ color: "#000" }}>{myData[0].title}</Typography>
                     <Typography variant="subtitle2" sx={{ color: "grey", fontSize: "12px" }}>
-                        تا {ChangeNumberToPersianForPhone(40)} درصد تخفیف بر روی تمامی آیتم ها تا آخر این هفته
+                        {ChangeNumberToPersianForPhone(myData[0].subTitle)}
                     </Typography>
                 </Box>
 
@@ -44,8 +57,8 @@ export default function Banner() {
                     alignItems: "center",
                 }}>
                     <Image
-                        src={"/images/bannerPart/banner-1.jpg"}
-                        alt="Big Sale"
+                        src={myData[0].image_url}
+                        alt={myData[0].title}
                         width={200}
                         height={200}
                         style={{ objectFit: "cover" }}
@@ -61,14 +74,14 @@ export default function Banner() {
                     textAlign: "center",
                     gap: 1
                 }}>
-                    <Typography variant="body1" sx={{ fontSize: "30px" }}>
-                        از{" "}
+                    <Typography variant="body1" sx={{ fontSize: "20px" }}>
+                        حداقل مبلغ خرید از {" "}
                         <Typography
                             variant="h3"
                             component="span"
                             sx={{ color: "tomato", fontSize: "30px", fontWeight: "bold" }}
                         >
-                            {ChangeNumbersToPersina(400)}
+                            {ChangeNumbersToPersina(myData[0].price)}
                         </Typography>
                     </Typography>
                     <Typography
@@ -77,7 +90,7 @@ export default function Banner() {
                         href={""}
                         sx={{ borderBottom: "1px solid #000", textAlign: "center", mt: 1 }}
                     >
-                        همین الان خرید کنید
+                        {myData[0].button_text}
                     </Typography>
                 </Box>
             </Box>
