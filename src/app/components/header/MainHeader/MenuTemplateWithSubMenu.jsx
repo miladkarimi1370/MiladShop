@@ -10,6 +10,7 @@ export default function MenuTemplateWithSubMenu({ text, myHref, whichPart }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const [hovered, setHovered] = useState(false);
 
+
     useEffect(() => {
         if (myAnchor.current) setAnchorEl(myAnchor.current);
     }, []);

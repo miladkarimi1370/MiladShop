@@ -7,17 +7,18 @@ import { useState } from "react";
 
 export default function FilterInMdUp() {
     const [isChecked, setIsChecked] = useState(false);
-
+    
     return (
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: 1 }}>
             {/* آیکون‌ها */}
             <Box sx={{
+                
                 display: { xs: "none", lg: "flex" },  // مخفی در XS تا MD، فقط در LG+ نمایش داده شود
                 justifyContent: "center",
                 alignItems: "center",
                 gap: 1
             }}>
-                <IconButton aria-label="menu" sx={{ border: "1px solid #cecece", borderRadius: "2px" }}>
+                <IconButton aria-label="menu" sx={{ border: "1px solid #cecece", borderRadius: "2px"  }}>
                     <MenuIcon />
                 </IconButton>
                 <IconButton aria-label="drag" sx={{ border: "1px solid #cecece", borderRadius: "2px", transform: "rotate(90deg)" }}>
