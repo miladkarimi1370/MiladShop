@@ -10,6 +10,7 @@ import { useState } from "react";
 
 export default function TemplateComponentForShowCardSingle({ title, href, src, price }) {
 
+    
     const [isHover, setIsHover] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(null);
 
@@ -43,7 +44,7 @@ export default function TemplateComponentForShowCardSingle({ title, href, src, p
                                 onMouseEnter={() => setIsHover(true)}
                                 onMouseLeave={() => setIsHover(false)}
                                 component="img"
-                                image={src[currentIndex]}
+                                image={src[currentIndex].image_url}
                                 alt={title}
                                 sx={{ objectFit: "cover", transition: "all 0.3s ease" }}
                             />

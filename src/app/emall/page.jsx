@@ -14,8 +14,66 @@ import BrandsFilter from "./brandsFilter/BrandsFilter";
 import SizeFilter from "./sizeFilter/SizeFilter";
 import Tags from "./tags/Tags";
 import AverageRating from "./averageRating/AverageRating";
+import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+import { useMyPagination } from "@/store/useMyPagination";
+import Loading from "../loading";
 
 export default function EMall() {
+    const [storeData, setStoreData] = useState([]);
+    const { currentPage } = useMyPagination(state => state);
+    const [allProducts, setAllProducts] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const limit = 18;
+
+    const startItem = (currentPage - 1) * limit;
+    const endItem = (currentPage * limit) - 1;
+    const allPages = Math.ceil(allProducts / limit)
+
+    useEffect(() => {
+        const supabase = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL,
+            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        )
+
+        const fetchAllData = async () => {
+
+            const { count } = await supabase
+                .from("milad-shop-products")
+                .select("*", { count: "exact", head: true });
+
+            setAllProducts(count || 0);
+        };
+
+
+        const fetchData = async () => {
+            setLoading(true)
+            const { data, error } = await supabase
+                .from('milad-shop-products')
+                .select(`
+            id ,
+            name , 
+            price , 
+            colors , 
+            milad-shop-product-images (
+            id , 
+            image_url
+            )  
+            `)
+                .range(startItem, endItem)
+            if (data) {
+                setLoading(false);
+                setStoreData(data)
+            }
+
+        }
+        fetchAllData();
+        fetchData();
+    }, [currentPage])
+
+
+
+
     return (
         <Container maxWidth="lg" disableGutters>
             <Box component="section" sx={{ width: "100%" }}>
@@ -43,7 +101,7 @@ export default function EMall() {
                     </Typography>
 
                     {/* شروع بریدکرامپ */}
-                    <BreadCrumbsComponents />
+                    <BreadCrumbsComponents arrayOfPath={[{ id: 1, name: "صفحه اصلی", myHref: "/" }, { id: 2, name: "فروشگاه", myHref: "/emall" }]} />
                     {/* پایان بریدکرامپ */}
                 </Box>
 
@@ -91,7 +149,9 @@ export default function EMall() {
 
                         <Divider sx={{ width: "100%", display: { xs: "flex", md: "none" } }} />
 
-                        <TemplateComponentForShowCardWithPicture />
+                        {loading ? <Loading /> :
+                            <TemplateComponentForShowCardWithPicture myData={storeData} startItem={startItem} endItem={endItem} allProducts={allProducts} allPages={allPages} />
+                        }
                     </Box>
 
                     {/* ستون فیلتر سمت راست */}

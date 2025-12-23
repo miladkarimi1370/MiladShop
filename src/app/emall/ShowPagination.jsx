@@ -1,11 +1,19 @@
+import { useMyPagination } from "@/store/useMyPagination";
 import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
 import { Pagination, PaginationItem, Stack } from "@mui/material";
 
-export default function MyPagination() {
+export default function MyPagination({ allPages }) {
+
+    const { currentPage, setCurrentPage } = useMyPagination()
+
     return (
         <Stack spacing={2}>
             <Pagination
-                count={10}
+                page={currentPage}
+                count={allPages}
+                onChange={(_, value) => {
+                    setCurrentPage(value)
+                }}
                 renderItem={(item) => {
                     const page =
                         typeof item.page === "number"
