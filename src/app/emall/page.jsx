@@ -1,12 +1,20 @@
-"use client"
-import { Box, Container, Divider, Typography } from "@mui/material";
+"use client";
+
+import {
+    Box,
+    Container,
+    Divider,
+    Typography,
+} from "@mui/material";
+
+import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
 
 import BreadCrumbsComponents from "../components/breadCrumbsComponent/BreadCrumbsComponent";
-
 import FilterInMdDown from "./FilterInMdDown";
+import FilterInMdUp from "./FilterInMdUp";
 import SelectionComponent from "./SelectionComponent";
 import TemplateComponentForShowCardWithPicture from "./TemplateComponentsForShowCardWithPicture/TemplateComponentForShowCardWithPicture";
-import FilterInMdUp from "./FilterInMdUp";
 import AccordionMenu from "./accordionMenuInCategories/AccordionMenu";
 import PriceFilter from "./priceFilter/PriceFilter";
 import ColorFilter from "./colorFilter/ColorFilter";
@@ -14,69 +22,92 @@ import BrandsFilter from "./brandsFilter/BrandsFilter";
 import SizeFilter from "./sizeFilter/SizeFilter";
 import Tags from "./tags/Tags";
 import AverageRating from "./averageRating/AverageRating";
-import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
-import { useMyPagination } from "@/store/useMyPagination";
 import Loading from "../loading";
+
+import { useMyPagination } from "@/store/useMyPagination";
+import { useTheShapeOfShowCards } from "@/store/useTheShapeOfShowCards";
+import { useCheckBoxForDiscountProducts } from "@/store/useCheckBoxForDiscountProducts";
 
 export default function EMall() {
     const [storeData, setStoreData] = useState([]);
-    const { currentPage } = useMyPagination(state => state);
     const [allProducts, setAllProducts] = useState(0);
     const [loading, setLoading] = useState(false);
+
     const limit = 18;
 
+    const { currentPage, setCurrentPage } = useMyPagination();
+    const { currentColumnBase } = useTheShapeOfShowCards();
+    const { currentStatusForCheckBox } = useCheckBoxForDiscountProducts();
+
     const startItem = (currentPage - 1) * limit;
-    const endItem = (currentPage * limit) - 1;
-    const allPages = Math.ceil(allProducts / limit)
+    const endItem = startItem + limit - 1;
+    const allPages = Math.ceil(allProducts / limit);
 
+    const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+
+    /* 🔹 وقتی فیلتر تخفیف تغییر می‌کنه → صفحه برگرده 1 */
     useEffect(() => {
-        const supabase = createClient(
-            process.env.NEXT_PUBLIC_SUPABASE_URL,
-            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-        )
+        setCurrentPage(1);
+    }, [currentStatusForCheckBox, setCurrentPage]);
 
-        const fetchAllData = async () => {
-
-            const { count } = await supabase
+    /* 🔹 گرفتن تعداد کل محصولات */
+    useEffect(() => {
+        const fetchAllDataCount = async () => {
+            const query = supabase
                 .from("milad-shop-products")
                 .select("*", { count: "exact", head: true });
 
+            if (currentStatusForCheckBox) {
+                query.eq("discount", true);
+            }
+
+            const { count } = await query;
             setAllProducts(count || 0);
         };
 
+        fetchAllDataCount();
+    }, [currentStatusForCheckBox]);
 
+    /* 🔹 گرفتن دیتا بر اساس page */
+    useEffect(() => {
         const fetchData = async () => {
-            setLoading(true)
-            const { data, error } = await supabase
-                .from('milad-shop-products')
+            setLoading(true);
+
+            let query = supabase
+                .from("milad-shop-products")
                 .select(`
-            id ,
-            name , 
-            price , 
-            colors , 
-            milad-shop-product-images (
-            id , 
+          id,
+          name,
+          price,
+          colors,
+          discount,
+          milad-shop-product-images (
+            id,
             image_url
-            )  
-            `)
-                .range(startItem, endItem)
-            if (data) {
-                setLoading(false);
-                setStoreData(data)
+          )
+        `)
+                .range(startItem, endItem);
+
+            if (currentStatusForCheckBox) {
+                query = query.eq("discount", true);
             }
 
-        }
-        fetchAllData();
+            const { data } = await query;
+
+            setStoreData(data || []);
+            setLoading(false);
+        };
+
         fetchData();
-    }, [currentPage])
-
-
-
+    }, [currentPage, currentStatusForCheckBox, currentColumnBase]);
 
     return (
         <Container maxWidth="lg" disableGutters>
             <Box component="section" sx={{ width: "100%" }}>
+                {/* Header */}
                 <Box
                     sx={{
                         width: "100%",
@@ -100,9 +131,12 @@ export default function EMall() {
                         فروشگاه
                     </Typography>
 
-                    {/* شروع بریدکرامپ */}
-                    <BreadCrumbsComponents arrayOfPath={[{ id: 1, name: "صفحه اصلی", myHref: "/" }, { id: 2, name: "فروشگاه", myHref: "/emall" }]} />
-                    {/* پایان بریدکرامپ */}
+                    <BreadCrumbsComponents
+                        arrayOfPath={[
+                            { id: 1, name: "صفحه اصلی", myHref: "/" },
+                            { id: 2, name: "فروشگاه", myHref: "/emall" },
+                        ]}
+                    />
                 </Box>
 
                 <Box
@@ -115,12 +149,12 @@ export default function EMall() {
                         flexWrap: { xs: "wrap", md: "nowrap" },
                     }}
                 >
+                    {/* Products */}
                     <Box
                         sx={{
-                            display: "flex",
                             width: { xs: "100%", md: "70%" },
+                            display: "flex",
                             justifyContent: "center",
-                            alignItems: "center",
                             flexWrap: "wrap",
                         }}
                     >
@@ -135,32 +169,38 @@ export default function EMall() {
                                 alignItems: "center",
                             }}
                         >
-                            {/* نمایش قسمت فیلتر */}
                             <Box sx={{ display: { xs: "none", md: "block" } }}>
                                 <FilterInMdUp />
                             </Box>
+
                             <Box sx={{ display: { xs: "block", md: "none" } }}>
                                 <FilterInMdDown />
                             </Box>
 
-                            {/* کامپوننت سلکشن برای فیلتر */}
                             <SelectionComponent />
                         </Box>
 
                         <Divider sx={{ width: "100%", display: { xs: "flex", md: "none" } }} />
 
-                        {loading ? <Loading /> :
-                            <TemplateComponentForShowCardWithPicture myData={storeData} startItem={startItem} endItem={endItem} allProducts={allProducts} allPages={allPages} />
-                        }
+                        {loading ? (
+                            <Loading />
+                        ) : (
+                            <TemplateComponentForShowCardWithPicture
+                                myData={storeData}
+                                startItem={startItem}
+                                endItem={endItem}
+                                allProducts={allProducts}
+                                allPages={allPages}
+                            />
+                        )}
                     </Box>
 
-                    {/* ستون فیلتر سمت راست */}
+                    {/* Filters */}
                     <Box
                         sx={{
                             display: { xs: "none", md: "flex" },
                             width: "30%",
                             justifyContent: "center",
-                            alignItems: "center",
                         }}
                     >
                         <Box
@@ -168,7 +208,6 @@ export default function EMall() {
                                 width: "80%",
                                 display: "flex",
                                 justifyContent: "center",
-                                alignItems: "center",
                                 flexWrap: "wrap",
                             }}
                         >

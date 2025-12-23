@@ -7,10 +7,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ChangeNumbersToPersina from "@/tools/changeNumbersToPersian";
 import { useState } from "react";
+import { useTheShapeOfShowCards } from "@/store/useTheShapeOfShowCards";
 
 export default function TemplateComponentForShowCardSingle({ title, href, src, price }) {
+    const { currentColumnBase, setCurrentColumnBase } = useTheShapeOfShowCards();
 
-    
     const [isHover, setIsHover] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(null);
 
@@ -25,21 +26,23 @@ export default function TemplateComponentForShowCardSingle({ title, href, src, p
     return (
         <>
             <Box sx={{
-                width: { xs: "48%", sm: "48%", md: "33%", lg: "33%" },
+                width: { xs: "48%", sm: "48%", md: "33%", lg: currentColumnBase === 3 ? "33%" : currentColumnBase === 2 ? "48%" : "25%" },
                 height: "100%",
                 my: 1,
-                p: { xl: 1, default: 0 }
+                p: { xl: 1, default: 0 },
+
             }}>
                 <Card component={Link} href={href} sx={{ textDecoration: "none", color: "inherit", position: "relative", width: "100%" }}>
                     <CardActionArea
                         disableRipple
                         component={"div"}
                         sx={{
+                            
                             "&:hover": { backgroundColor: "transparent !important" },
                             "& .MuiCardActionArea-focusHighlight": { backgroundColor: "transparent" }
                         }}
                     >
-                        <Box sx={{ position: "relative" }}>
+                        <Box sx={{ position: "relative"  }}>
                             <CardMedia
                                 onMouseEnter={() => setIsHover(true)}
                                 onMouseLeave={() => setIsHover(false)}

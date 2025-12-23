@@ -13,7 +13,7 @@ export default function TemplateComponentForShowCardWithPicture({ myData, allPro
             <Container maxWidth={"xl"} sx={{ display: "flex", justifyContent: "center", alignItems: "center", my: 2 }}>
                 <Box sx={{ width: "100%" }}>
 
-                    <Box sx={{ width: "100%", height: "auto", display: "flex", justifyContent: "space-evenly", alignItems: "center", flexWrap: "wrap" }}>
+                    <Box sx={{ width: "100%", height: "auto", display: "flex", justifyContent: "space-evenly", alignItems: "center", flexWrap: "wrap"}}>
                         {/* کامپونتنت اصلی  */}
                         {myData.map((item) => {
                             return (
