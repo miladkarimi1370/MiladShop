@@ -8,14 +8,14 @@ import TemplateComponentForShowAccordion from "./TemplateComponentForShowAccordi
 export default function AccordionMenu() {
     const inforFromCategory = [
         {
-            id: 1, myHref: "", myTitle: "لوازم جانبی", countOfCategory: 23, subTitles: [
+            id: 1, myHref: "/emall/accessory", myTitle: "لوازم جانبی", countOfCategory: 23, subTitles: [
                 { id: 1, title: "پوتین", myHref: "", countOfCategory: 4 },
                 { id: 2, title: "کفش", myHref: "", countOfCategory: 3 },
                 { id: 3, title: "عینک آفتابی", myHref: "", countOfCategory: 2 },
             ]
         },
         {
-            id: 2, myHref: "", myTitle: "محصولات زیبایی", countOfCategory: 12, subTitles: [
+            id: 2, myHref: "/emall/cosmetic", myTitle: "محصولات زیبایی", countOfCategory: 12, subTitles: [
                 { id: 1, title: "چشم", myHref: "", countOfCategory: 6 },
                 { id: 2, title: "عطر و ادکلن", myHref: "", countOfCategory: 6 },
                 { id: 3, title: "مراقبت از مو", myHref: "", countOfCategory: 6 },
@@ -27,7 +27,7 @@ export default function AccordionMenu() {
             ]
         },
         {
-            id: 3, myHref: "", myTitle: "پوشاک", countOfCategory: 43, subTitles: [
+            id: 3, myHref: "/emall", myTitle: "پوشاک", countOfCategory: 43, subTitles: [
                 { id: 1, title: "کیف", myHref: "", countOfCategory: 6 },
                 { id: 2, title: "چکمه", myHref: "", countOfCategory: 3 },
                 { id: 3, title: "پیراهن", myHref: "", countOfCategory: 30 },
@@ -36,7 +36,7 @@ export default function AccordionMenu() {
             ]
         },
         {
-            id: 4, myHref: "", myTitle: "کالای دیجیتال", countOfCategory: 30, subTitles: [
+            id: 4, myHref: "/emall/electronics", myTitle: "کالای دیجیتال", countOfCategory: 0, subTitles: [
                 { id: 1, title: "دوربین فیلمبرداری", myHref: "", countOfCategory: 2 },
                 { id: 2, title: "لپ تاپ", myHref: "", countOfCategory: 7 },
                 { id: 3, title: "هدفون", myHref: "", countOfCategory: 2 },
@@ -49,7 +49,7 @@ export default function AccordionMenu() {
             ]
         },
         {
-            id: 5, myHref: "", myTitle: "وسائل منزل", countOfCategory: 32, subTitles: [
+            id: 5, myHref: "/emall/furniture", myTitle: "وسائل منزل", countOfCategory: 0, subTitles: [
                 { id: 1, title: "کمد", myHref: "", countOfCategory: 2 },
                 { id: 2, title: "صندلی", myHref: "", countOfCategory: 4 },
                 { id: 3, title: "چراغ خواب", myHref: "", countOfCategory: 3 },
@@ -59,7 +59,7 @@ export default function AccordionMenu() {
             ]
         },
         {
-            id: 6, myHref: "", myTitle: "جواهرات", countOfCategory: 10, subTitles: [
+            id: 6, myHref: "/emall/jewelry", myTitle: "جواهرات", countOfCategory: 2, subTitles: [
                 { id: 1, title: "دستبند و النگو", myHref: "", countOfCategory: 6 },
                 { id: 2, title: "گوشواره", myHref: "", countOfCategory: 4 },
                 { id: 3, title: "گردنبند", myHref: "", countOfCategory: 2 },
@@ -69,7 +69,7 @@ export default function AccordionMenu() {
             ]
         },
         {
-            id: 7, myHref: "", myTitle: "آقایان", countOfCategory: 31, subTitles: [
+            id: 7, myHref: "/emall/men", myTitle: "آقایان", countOfCategory: 31, subTitles: [
                 { id: 1, title: "لوازم جانبی", myHref: "", countOfCategory: 15 },
                 { id: 2, title: "لباس", myHref: "", countOfCategory: 9 },
                 { id: 3, title: "کفش و کتانی", myHref: "", countOfCategory: 2 },
@@ -81,7 +81,7 @@ export default function AccordionMenu() {
             ]
         },
         {
-            id: 8, myHref: "", myTitle: "ورزشی", countOfCategory: 17, subTitles: [
+            id: 8, myHref: "/emall/sport", myTitle: "ورزشی", countOfCategory: 17, subTitles: [
                 { id: 1, title: "بدنسازی", myHref: "", countOfCategory: 9 },
                 { id: 2, title: "کلاه", myHref: "", countOfCategory: 10 },
                 { id: 3, title: "مردانه", myHref: "", countOfCategory: 11 },
@@ -93,7 +93,7 @@ export default function AccordionMenu() {
             ]
         },
         {
-            id: 9, myHref: "", myTitle: "بانوان", countOfCategory: 38, subTitles: [
+            id: 9, myHref: "/emall/women", myTitle: "بانوان", countOfCategory: 38, subTitles: [
                 { id: 1, title: "لوازم جانبی", myHref: "", countOfCategory: 24 },
                 { id: 2, title: "عینک", myHref: "", countOfCategory: 6 },
                 { id: 3, title: "کیف دستی", myHref: "", countOfCategory: 3 },

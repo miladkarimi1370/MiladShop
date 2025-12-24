@@ -29,6 +29,7 @@ import { useTheShapeOfShowCards } from "@/store/useTheShapeOfShowCards";
 import { useCheckBoxForDiscountProducts } from "@/store/useCheckBoxForDiscountProducts";
 import { useSortEmallProducts } from "@/store/sortEmallProducts";
 import { supabase } from "@/utils/supabaseKey";
+import { usePriceFilter } from "@/store/usePriceFilter";
 
 export default function EMall() {
     const [storeData, setStoreData] = useState([]);
@@ -48,7 +49,8 @@ export default function EMall() {
 
     const { currentSort } = useSortEmallProducts(state => state)
 
-
+    const { currentPriceFilter } = usePriceFilter(state => state)
+    console.log(currentPriceFilter);
 
 
     /* 🔹 وقتی فیلتر تخفیف تغییر می‌کنه → صفحه برگرده 1 */
@@ -95,16 +97,37 @@ export default function EMall() {
             id,
             image_url
           )  
-        `)
+        ` , { count: "exact" })
                 .range(startItem, endItem);
 
             if (currentStatusForCheckBox) {
                 query = query.eq("discount", true);
             }
 
+            // شروع قسمت فیلتر کردن بر اساس قیمت
+            switch (currentPriceFilter) {
+                case "less200":
+                    query = query.lt("price", 200);
+                    break;
+                case "200to399":
+                    query = query.gte("price", 200).lt("price", 400)
+                    break;
+                case "400to599":
+                    query = query.gte("price", 400).lt("price", 600)
+                    break;
+                case "600to899":
+                    query = query.gte("price", 600).lt("price", 900)
+                    break;
+                case "more900":
+                    query = query.gte("price", 900)
+                    break;
 
-            const { data } = await query;
+            }
 
+            // پایان قسمت فیلتر کردن بر اساس قیمت
+
+            const { data, count } = await query;
+            setAllProducts(count || 0)
 
             // شروع قسمت سورت کردن محصولات
 
@@ -123,7 +146,10 @@ export default function EMall() {
                 }
             }
 
-            // شروع قسمت سورت کردن محصولات
+            // پایان قسمت سورت کردن محصولات
+
+
+
 
 
             setStoreData(data || []);
@@ -131,7 +157,7 @@ export default function EMall() {
         };
 
         fetchData();
-    }, [currentPage, currentStatusForCheckBox, currentColumnBase , currentSort]);
+    }, [currentPage, currentStatusForCheckBox, currentColumnBase, currentSort, currentPriceFilter]);
 
     return (
         <Container maxWidth="lg" disableGutters>

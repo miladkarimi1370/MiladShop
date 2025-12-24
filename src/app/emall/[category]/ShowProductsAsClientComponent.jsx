@@ -30,13 +30,14 @@ import Tags from "../tags/Tags";
 import AverageRating from "../averageRating/AverageRating";
 import { supabase } from "@/utils/supabaseKey";
 import { useSortEmallProducts } from "@/store/sortEmallProducts";
+import { usePriceFilter } from "@/store/usePriceFilter";
 
 export default function ShowProductsAsClientComponent({ category }) {
     const [storeData, setStoreData] = useState([]);
     const [allProducts, setAllProducts] = useState(0);
     const [loading, setLoading] = useState(false);
     const { currentSort, setCurrentSortDefault } = useSortEmallProducts()
-
+    const { currentPriceFilter } = usePriceFilter(state => state)
     const limit = 18;
 
     const { currentPage, setCurrentPage } = useMyPagination();
@@ -105,7 +106,32 @@ export default function ShowProductsAsClientComponent({ category }) {
                 query = query.eq("discount", true);
             }
 
+            // شروع قسمت فیلتر کردن بر اساس قیمت
+            switch (currentPriceFilter) {
+                case "less200":
+                    query = query.lt("price", 200);
+                    break;
+                case "200to399":
+                    query = query.gte("price", 200).lt("price", 400)
+                    break;
+                case "400to599":
+                    query = query.gte("price", 400).lt("price", 600)
+                    break;
+                case "600to899":
+                    query = query.gte("price", 600).lt("price", 900)
+                    break;
+                case "more900":
+                    query = query.gte("price", 900)
+                    break;
+
+            }
+
+            // پایان قسمت فیلتر کردن بر اساس قیمت
+
+
+
             const { count, data } = await query;
+            setAllProducts(count || 0)
             // شروع قسمت سورت کردن محصولات
 
             if (data) {
@@ -131,7 +157,7 @@ export default function ShowProductsAsClientComponent({ category }) {
         };
 
         fetchData();
-    }, [currentPage, currentStatusForCheckBox, currentColumnBase, category , currentSort]);
+    }, [currentPage, currentStatusForCheckBox, currentColumnBase, category, currentSort , currentPriceFilter]);
 
     return (
         <Container maxWidth="lg" disableGutters>
