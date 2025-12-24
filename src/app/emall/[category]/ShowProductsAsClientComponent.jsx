@@ -33,6 +33,8 @@ import { useSortEmallProducts } from "@/store/sortEmallProducts";
 import { usePriceFilter } from "@/store/usePriceFilter";
 import { useColorFilter } from "@/store/colorFilter";
 import { useBrandsFilter } from "@/store/useBrandsFilter";
+import { useSizeFilter } from "@/store/useSizeFilter";
+
 
 export default function ShowProductsAsClientComponent({ category }) {
     const [storeData, setStoreData] = useState([]);
@@ -47,7 +49,7 @@ export default function ShowProductsAsClientComponent({ category }) {
     const { currentStatusForCheckBox } = useCheckBoxForDiscountProducts();
     const { currentColor } = useColorFilter(state => state)
     const { currentBrnad } = useBrandsFilter(state => state)
-
+    const { currentSize } = useSizeFilter(state => state)
 
     const startItem = (currentPage - 1) * limit;
     const endItem = startItem + limit - 1;
@@ -120,6 +122,11 @@ export default function ShowProductsAsClientComponent({ category }) {
             if (currentBrnad !== "all") {
                 query = query.eq("brand", currentBrnad)
             }
+            if (currentSize !== "all") {
+                query = query.contains("sizes", [currentSize])
+            }
+
+
             // شروع قسمت فیلتر کردن بر اساس قیمت
             switch (currentPriceFilter) {
                 case "less200":
@@ -171,7 +178,7 @@ export default function ShowProductsAsClientComponent({ category }) {
         };
 
         fetchData();
-    }, [currentPage, currentStatusForCheckBox, currentColumnBase, category, currentSort, currentPriceFilter, currentColor, currentBrnad]);
+    }, [currentPage, currentStatusForCheckBox, currentColumnBase, category, currentSort, currentPriceFilter, currentColor, currentBrnad, currentSize]);
 
     return (
         <Container maxWidth="lg" disableGutters>

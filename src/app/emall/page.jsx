@@ -32,6 +32,7 @@ import { supabase } from "@/utils/supabaseKey";
 import { usePriceFilter } from "@/store/usePriceFilter";
 import { useColorFilter } from "@/store/colorFilter";
 import { useBrandsFilter } from "@/store/useBrandsFilter";
+import { useSizeFilter } from "@/store/useSizeFilter";
 
 export default function EMall() {
     const [storeData, setStoreData] = useState([]);
@@ -53,6 +54,7 @@ export default function EMall() {
     const { currentPriceFilter } = usePriceFilter(state => state)
     const { currentColor } = useColorFilter(state => state)
     const { currentBrnad } = useBrandsFilter(state => state)
+    const { currentSize } = useSizeFilter(state => state)
 
 
 
@@ -115,6 +117,11 @@ export default function EMall() {
             if (currentBrnad !== "all") {
                 query = query.eq("brand", currentBrnad)
             }
+
+            if (currentSize !== "all") {
+                query = query.contains("sizes", [currentSize])
+            }
+
             // شروع قسمت فیلتر کردن بر اساس قیمت
             switch (currentPriceFilter) {
                 case "less200":
@@ -163,7 +170,7 @@ export default function EMall() {
         };
 
         fetchData();
-    }, [currentPage, currentStatusForCheckBox, currentColumnBase, currentSort, currentPriceFilter, currentColor, currentBrnad]);
+    }, [currentPage, currentStatusForCheckBox, currentColumnBase, currentSort, currentPriceFilter, currentColor, currentBrnad, currentSize]);
 
     return (
         <Container maxWidth="lg" disableGutters>
