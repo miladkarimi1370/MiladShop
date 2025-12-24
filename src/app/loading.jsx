@@ -1,59 +1,34 @@
 "use client";
-import { Box, Skeleton, CircularProgress } from "@mui/material";
+import { Box, Skeleton, Container } from "@mui/material";
 
 export default function Loading() {
     return (
-        <Box
-            sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "flex-start",
-                flexWrap: "wrap",
-                gap: 2,
-                py: 2,
-            }}
-        >
-            {Array.from({ length: 18 }).map((_, index) => (
-                <Box
-                    key={index}
-                    sx={{
-                        width: 220,
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 1,
-                    }}
-                >
-                    {/* تصویر کارت */}
-                    <Box sx={{ position: "relative" }}>
-                        <Skeleton
-                            variant="rectangular"
-                            height={260}
-                            animation="wave"
-                            sx={{ borderRadius: 2 }}
-                        />
+        <Container maxWidth="lg" sx={{ py: 4 }}>
 
-                        {/* spinner وسط کارت */}
-                        <Box
-                            sx={{
-                                position: "absolute",
-                                inset: 0,
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}
-                        >
-                            <CircularProgress size={28} />
-                        </Box>
-                    </Box>
+            {/* اسلایدر */}
+            <Box sx={{ width: "100%", height: { xs: 310, md: 420, lg: 520, xl: 600 }, mb: 4, position: "relative" }}>
+                <Skeleton
+                    variant="rectangular"
+                    width="100%"
+                    height="100%"
+                    animation="wave"
+                    sx={{ borderRadius: 3 }}
+                />
+            </Box>
 
-                    {/* عنوان */}
-                    <Skeleton height={24} />
-
-                    {/* قیمت */}
-                    <Skeleton width="60%" height={24} />
-                </Box>
-            ))}
-        </Box>
+            {/* سه مربع بخش OfferForSale */}
+            <Box sx={{ display: "flex", gap: 2, justifyContent: { xs: "center", md: "space-between" }, flexWrap: "wrap" }}>
+                {Array.from({ length: 3 }).map((_, index) => (
+                    <Skeleton
+                        key={index}
+                        variant="rectangular"
+                        width={{ xs: "30vw", sm: "32%", md: "32%" }}
+                        height={200}
+                        animation="wave"
+                        sx={{ borderRadius: 2 }}
+                    />
+                ))}
+            </Box>
+        </Container>
     );
 }
