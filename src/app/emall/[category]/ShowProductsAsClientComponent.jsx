@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+
 
 
 
@@ -31,18 +31,20 @@ import AverageRating from "../averageRating/AverageRating";
 import { supabase } from "@/utils/supabaseKey";
 import { useSortEmallProducts } from "@/store/sortEmallProducts";
 import { usePriceFilter } from "@/store/usePriceFilter";
+import { useColorFilter } from "@/store/colorFilter";
 
 export default function ShowProductsAsClientComponent({ category }) {
     const [storeData, setStoreData] = useState([]);
     const [allProducts, setAllProducts] = useState(0);
     const [loading, setLoading] = useState(false);
-    const { currentSort, setCurrentSortDefault } = useSortEmallProducts()
+    const { currentSort } = useSortEmallProducts()
     const { currentPriceFilter } = usePriceFilter(state => state)
     const limit = 18;
 
     const { currentPage, setCurrentPage } = useMyPagination();
     const { currentColumnBase } = useTheShapeOfShowCards();
     const { currentStatusForCheckBox } = useCheckBoxForDiscountProducts();
+    const { currentColor } = useColorFilter(state => state)
 
     const startItem = (currentPage - 1) * limit;
     const endItem = startItem + limit - 1;
@@ -69,6 +71,8 @@ export default function ShowProductsAsClientComponent({ category }) {
             if (currentStatusForCheckBox) {
                 query.eq("discount", true);
             }
+
+
 
             const { count } = await query;
             setAllProducts(count || 0);
@@ -105,6 +109,11 @@ export default function ShowProductsAsClientComponent({ category }) {
             if (currentStatusForCheckBox) {
                 query = query.eq("discount", true);
             }
+            if (currentColor !== "all") {
+                query = query.contains("colors", [currentColor])
+
+            }
+
 
             // شروع قسمت فیلتر کردن بر اساس قیمت
             switch (currentPriceFilter) {
@@ -157,7 +166,7 @@ export default function ShowProductsAsClientComponent({ category }) {
         };
 
         fetchData();
-    }, [currentPage, currentStatusForCheckBox, currentColumnBase, category, currentSort , currentPriceFilter]);
+    }, [currentPage, currentStatusForCheckBox, currentColumnBase, category, currentSort, currentPriceFilter, currentColor]);
 
     return (
         <Container maxWidth="lg" disableGutters>
