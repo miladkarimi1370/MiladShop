@@ -18,14 +18,19 @@ export default function TemplateComponentForPictures({ href, mySrc, title }) {
 
             >
                 <Link href={href} style={{ display: "block", width: "100%" }}>
-                    <Box sx={{ width: "100%", overflow: "hidden" }}>
-                        <Image src={mySrc}
+                    <Box sx={{ width: "100%", height: "30vh", position: "relative", overflow: "hidden" }}>
+                        <Image
+                            src={mySrc}
                             alt={title}
-                            width={1200}
-                            height={600}
-                            style={{ width: "100%", height: "30vh", objectFit: "cover", transform: isBlock ? "scale(1.1) rotate(5deg)" : "scale(1) rotate(0deg)", transition: "all 0.2s ease" }}
+                            fill
+                            style={{
+                                objectFit: "cover",
+                                transform: isBlock ? "scale(1.1) rotate(5deg)" : "scale(1) rotate(0deg)",
+                                transition: "all 0.2s ease"
+                            }}
                         />
                     </Box>
+
                     <Box sx={{
                         backgroundColor: "white",
                         borderRadius: "50%",

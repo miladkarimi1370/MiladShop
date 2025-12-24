@@ -89,7 +89,7 @@ export default function TemplateComponentPagesMenu({ myTitle }) {
                                     display: "flex",
                                     justifyContent: "space-evenly",
                                     alignItems: "center",
-                                    height: "20vh",
+                                    height: "200px",
                                     transform: "translateY(-13px)",
                                     p: 1,
 

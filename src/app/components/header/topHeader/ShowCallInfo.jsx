@@ -12,11 +12,11 @@ export default function ShowCallInfo() {
         <Link
             href={"tel:+989123456789"}
             underline="none"
-
+        
         >
             <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "5px", "&:hover .child1": { color: "tomato" }, "&:hover .child2": { color: "tomato" } }}>
                 <Typography variant="caption" color="#000" className="child1" sx={{
-                    direction: "ltr", fontSize: "16px"
+                    direction: "ltr", fontSize: "14px"
                     , transition: "all 0.4s",
                     fontWeight: "bold"
                 }}

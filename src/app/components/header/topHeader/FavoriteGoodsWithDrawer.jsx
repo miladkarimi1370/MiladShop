@@ -47,7 +47,7 @@ export default function FavoriteGoodsWithDrawer({ color }) {
             <FavoriteBorderRoundedIcon
                 onClick={toggleDrawer(true)}
                 sx={{
-                    color: { color }, "&:hover": {
+                    color:  color , "&:hover": {
                         color: "grey",
                         transition: "all 0.4s"
                     }

@@ -99,7 +99,7 @@ export default function TemplateComponentBlogMenu({ myTitle }) {
                                     display: "flex",
                                     justifyContent: "space-evenly",
                                     alignItems: "center",
-                                    height: "60vh",
+                                    height: "550px",
                                     transform: isOpen ? "translateY(-13px)" : "translateY(-10px)",
                                     transition: "transform .25s ease",
                                     p: 1

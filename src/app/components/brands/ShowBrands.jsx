@@ -1,4 +1,4 @@
-"use client";
+
 import { Box, Container, Divider } from "@mui/material";
 import Image from "next/image";
 
@@ -11,11 +11,10 @@ export default function ShowBrands() {
           display: "flex",
           justifyContent: "space-evenly",
           alignItems: "center",
-          height: "20vh",
-      
-          flexWrap: "nowrap", // ❌ wrap حذف شد
+          minHeight: 140,          // ⭐ ثابت، نه VH
+          flexWrap: "nowrap",
           gap: 2,
-          overflowX: "auto", // ✅ در صورت کمبود فضا، اسکرول افقی بده
+          overflowX: "auto",
         }}
       >
         {["1.jpg", "2.jpg", "3.jpg", "4.jpg"].map((img, index) => (
@@ -23,26 +22,21 @@ export default function ShowBrands() {
             key={index}
             sx={{
               position: "relative",
-              width: { xs: "100px", sm: "130px", md: "150px" }, // عرض ثابت‌تر
-              aspectRatio: "1 / 1",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              transition: "transform 0.3s ease",
-              "&:hover": {
-                transform: "scale(1.08)",
-              },
+              width: 120,
+              height: 120,        // ⭐ به‌جای aspect-ratio
             }}
           >
             <Image
               src={`/images/brands/${img}`}
-              alt={`brand-${index + 1}`}
+              alt={`brand-${index}`}
               fill
               style={{ objectFit: "contain" }}
+              priority               // ⭐ چون بالای صفحه است
             />
           </Box>
         ))}
       </Container>
+
       <Divider />
     </>
   );

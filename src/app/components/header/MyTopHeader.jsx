@@ -1,5 +1,5 @@
 "use client";
-import { Box, Container, Divider } from "@mui/material";
+import { Box, Container, Divider, TextField } from "@mui/material";
 import ShowLogo from "@/app/components/header/topHeader/ShowLogo";
 import ShowCartWithDrawer from "@/app/components/header/topHeader/showCartWithDrawer";
 import ShowMenuIcon from "@/app/components/header/topHeader/ShowMenuIcon";
@@ -10,7 +10,7 @@ import FavoriteGoodsWithDrawer from "./topHeader/FavoriteGoodsWithDrawer";
 import ShowLoginOrRegisterIcon from "./topHeader/ShowLoginOrRegisterIcon";
 
 import ShowCallInfo from "./topHeader/ShowCallInfo";
-import ShowSearchWithoutDrawer from "./topHeader/ShowSearchWithoutDrawer";
+
 import ShowBigLogo from "./topHeader/ShowBigLogo";
 
 
@@ -74,7 +74,7 @@ export default function MyTopHeader() {
 
                 justifyContent: "center",
                 alignItems: "center",
-                height: "10vh",
+                my: 1,
 
                 width: {
                     md: "100%",
@@ -100,20 +100,13 @@ export default function MyTopHeader() {
                         <ShowCallInfo />
 
                     </Box>
-                    <Box
-                        component="form"
-                        sx={{
-                            '& > :not(style)': {
-                                width: '60ch', background: "#F5F5F5", color: "grey"
-                            }, display: "flex", justifyContent: "center", alignItems: "center"
-                        }}
-                        noValidate
-                        autoComplete="off"
+                    <TextField
+                        
+                        label="جستجو . . ."
+                        
+                        size="small"
 
-                    >
-
-                        <ShowSearchWithoutDrawer />
-                    </Box >
+                    />
                     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                         <ShowBigLogo />
                     </Box>

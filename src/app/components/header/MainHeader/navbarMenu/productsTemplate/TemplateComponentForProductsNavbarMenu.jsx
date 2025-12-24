@@ -122,10 +122,11 @@ export default function TemplateComponentForProductsNavbarMenu({ myTitle }) {
                                     display: "flex",
                                     justifyContent: "space-evenly",
                                     alignItems: "center",
-                                    height: "45vh",
+                                    height: "450px",
                                     transform: isOpen ? "translateY(-13px)" : "translateY(-10px)",
                                     transition: "transform .25s ease",
-                                    p: 1
+                                    p: 1 , 
+                                    
                                 }}
                             >
                                 <Box

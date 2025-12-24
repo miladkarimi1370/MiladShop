@@ -1,4 +1,4 @@
-"use client"
+
 import { Box, Container, Divider } from "@mui/material";
 import ShowHamburgerMenuIconWithTitle from "./MainHeader/ShowHamburgerMenuIconWithTitle";
 import TemplateComponentForNavbarMenu from "./MainHeader/navbarMenu/homeTemplate/TemplateComponentForHomeNavbarMenu";
@@ -18,7 +18,7 @@ export default function MyMainHeader() {
                 }
 
             }} component={"section"} >
-                <Box component={"div"} sx={{ width: "100%", display: "flex", height: "5vh" }}>
+                <Box component={"div"} sx={{ width: "100%", display: "flex", height: "50px"  }}>
                     <Box sx={{
 
                         display: "flex",

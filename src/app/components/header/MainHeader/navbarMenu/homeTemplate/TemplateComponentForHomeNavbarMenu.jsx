@@ -132,9 +132,10 @@ export default function TemplateComponentForHomeNavbarMenu({ myTitle }) {
                                     display: "flex",
                                     justifyContent: "space-evenly",
                                     alignItems: "center",
-                                    height: "35vh",
+                                    height: "400px",
                                     transform: "translateY(-13px)",
                                     p: 2,
+                                    
                                 }}
                             >
                                 <List disablePadding sx={{

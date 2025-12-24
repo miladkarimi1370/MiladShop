@@ -27,7 +27,7 @@ import ColorFilter from "../colorFilter/ColorFilter";
 import BrandsFilter from "../brandsFilter/BrandsFilter";
 import SizeFilter from "../sizeFilter/SizeFilter";
 import Tags from "../tags/Tags";
-import AverageRating from "../averageRating/AverageRating";
+
 import { supabase } from "@/utils/supabaseKey";
 import { useSortEmallProducts } from "@/store/sortEmallProducts";
 import { usePriceFilter } from "@/store/usePriceFilter";
@@ -293,7 +293,7 @@ export default function ShowProductsAsClientComponent({ category }) {
                             <BrandsFilter />
                             <SizeFilter />
                             <Tags />
-                            <AverageRating />
+                 
                         </Box>
                     </Box>
                 </Box>

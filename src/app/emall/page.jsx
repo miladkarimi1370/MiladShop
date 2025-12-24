@@ -21,7 +21,6 @@ import ColorFilter from "./colorFilter/ColorFilter";
 import BrandsFilter from "./brandsFilter/BrandsFilter";
 import SizeFilter from "./sizeFilter/SizeFilter";
 import Tags from "./tags/Tags";
-import AverageRating from "./averageRating/AverageRating";
 import Loading from "../loading";
 
 import { useMyPagination } from "@/store/useMyPagination";
@@ -33,6 +32,7 @@ import { usePriceFilter } from "@/store/usePriceFilter";
 import { useColorFilter } from "@/store/colorFilter";
 import { useBrandsFilter } from "@/store/useBrandsFilter";
 import { useSizeFilter } from "@/store/useSizeFilter";
+import { useRateFilter } from "@/store/useRateFilter";
 
 export default function EMall() {
     const [storeData, setStoreData] = useState([]);
@@ -56,6 +56,7 @@ export default function EMall() {
     const { currentBrnad } = useBrandsFilter(state => state)
     const { currentSize } = useSizeFilter(state => state)
 
+ 
 
 
     /* 🔹 وقتی فیلتر تخفیف تغییر می‌کنه → صفحه برگرده 1 */
@@ -122,6 +123,7 @@ export default function EMall() {
                 query = query.contains("sizes", [currentSize])
             }
 
+         
             // شروع قسمت فیلتر کردن بر اساس قیمت
             switch (currentPriceFilter) {
                 case "less200":
@@ -285,7 +287,7 @@ export default function EMall() {
                             <BrandsFilter />
                             <SizeFilter />
                             <Tags />
-                            <AverageRating />
+                       
                         </Box>
                     </Box>
                 </Box>

@@ -14,7 +14,7 @@ export default function ShowCartWithDrawer({ color }) {
         <Box
             role="presentation" sx={{
                 width: 400, height: "100vh",
-
+       
             }}
         >
             <List >
@@ -54,8 +54,10 @@ export default function ShowCartWithDrawer({ color }) {
             >
                 <AddShoppingCart
                     sx={{
-                        color: { color },
+                        color:  color ,
                         marginInline: "0.5rem",
+                        fontSize : "23px" ,
+                 
                         "&:hover": {
                             color: "grey",
                             cursor: "pointer",

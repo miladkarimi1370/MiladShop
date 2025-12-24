@@ -17,13 +17,13 @@ import ChangeNumbersToPersina from '@/tools/changeNumbersToPersian';
 
 export default function TemplateComponentForShowSlider({ sliders }) {
 
- 
+
 
     return (
         <>
             <Box sx={{
                 width: "100vw",
-                height: { xs: "35vh", md: "40vh", lg: "50vh", xl: "60vh" },
+                height: { xs: "310px", md: "420px", lg: "520px", xl: "600px" },
                 cursor: "pointer",
                 position: "relative"
             }}>
@@ -44,19 +44,20 @@ export default function TemplateComponentForShowSlider({ sliders }) {
                         sliders && sliders.map((item) => {
                             return (
                                 <SwiperSlide key={item.id}>
-                                    <Card sx={{ width: "100%", height: "100%", position: "relative" }}>
+                                    <Card sx={{ width: "100%", height: "100%", position: "relative", aspectRatio: "16/9" }}>
                                         <Image
                                             src={item.image_url}
                                             alt={item.title}
                                             fill
-                                            style={{ objectFit: "cover" }}
+                                            style={{ objectFit: "cover", width: "100%", height: "100%" }}
                                         />
                                         <Box sx={{
+
                                             width: { xs: "70vw", md: "70vw" },
                                             height: "15vh",
                                             position: "absolute",
                                             top: "50%",
-                                      
+
                                             left: { xs: "50%", sm: "60%", md: "70%" },
                                             transform: (item.order_number % 2 === 0 ? "translate(-20%, -50%)" : "translate(-70%, -50%)"),
                                             flexDirection: "column",

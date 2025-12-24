@@ -172,8 +172,8 @@ export default function ShortSearchWithDrawer() {
             <Drawer open={openSearch} onClose={toggleDrawerForSearch(false)}
                 PaperProps={{
                     sx: {
-                        height: "30vh",         // ارتفاع دلخواه
-                        width: "100vw",         // عرض تمام صفحه
+                        height: "250px",         // ارتفاع دلخواه
+                        width: "100%",         // عرض تمام صفحه
                         display: { sm: "block", md: "none" },
                         backgroundColor: "#fff" // مثلاً رنگ زمینه
                     }
