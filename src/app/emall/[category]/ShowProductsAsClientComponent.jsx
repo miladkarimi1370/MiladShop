@@ -28,12 +28,14 @@ import BrandsFilter from "../brandsFilter/BrandsFilter";
 import SizeFilter from "../sizeFilter/SizeFilter";
 import Tags from "../tags/Tags";
 import AverageRating from "../averageRating/AverageRating";
+import { supabase } from "@/utils/supabaseKey";
+import { useSortEmallProducts } from "@/store/sortEmallProducts";
 
 export default function ShowProductsAsClientComponent({ category }) {
     const [storeData, setStoreData] = useState([]);
     const [allProducts, setAllProducts] = useState(0);
     const [loading, setLoading] = useState(false);
-    console.log(category);
+    const { currentSort, setCurrentSortDefault } = useSortEmallProducts()
 
     const limit = 18;
 
@@ -45,10 +47,7 @@ export default function ShowProductsAsClientComponent({ category }) {
     const endItem = startItem + limit - 1;
     const allPages = Math.ceil(allProducts / limit);
 
-    const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    );
+
 
     /* 🔹 وقتی فیلتر تخفیف تغییر می‌کنه → صفحه برگرده 1 */
     useEffect(() => {
@@ -98,7 +97,7 @@ export default function ShowProductsAsClientComponent({ category }) {
           id ,
            slug
           )
-        ` , { count: "exact"})
+        ` , { count: "exact" })
                 .eq("milad-shop-category.slug", category)
                 .range(startItem, endItem);
 
@@ -107,15 +106,32 @@ export default function ShowProductsAsClientComponent({ category }) {
             }
 
             const { count, data } = await query;
-            console.log(count);
-            
+            // شروع قسمت سورت کردن محصولات
+
+            if (data) {
+                switch (currentSort) {
+                    case "latest":
+                        data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                        break;
+                    case "cheapest":
+                        data.sort((a, b) => a.price - b.price)
+                        break;
+                    case "expensive":
+                        data.sort((a, b) => b.price - a.price)
+                        break;
+
+                }
+            }
+
+            // شروع قسمت سورت کردن محصولات
+
             setAllProducts(count || 0)
             setStoreData(data || []);
             setLoading(false);
         };
 
         fetchData();
-    }, [currentPage, currentStatusForCheckBox, currentColumnBase, category ]);
+    }, [currentPage, currentStatusForCheckBox, currentColumnBase, category , currentSort]);
 
     return (
         <Container maxWidth="lg" disableGutters>

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+
 
 import BreadCrumbsComponents from "../components/breadCrumbsComponent/BreadCrumbsComponent";
 import FilterInMdDown from "./FilterInMdDown";
@@ -27,12 +27,14 @@ import Loading from "../loading";
 import { useMyPagination } from "@/store/useMyPagination";
 import { useTheShapeOfShowCards } from "@/store/useTheShapeOfShowCards";
 import { useCheckBoxForDiscountProducts } from "@/store/useCheckBoxForDiscountProducts";
+import { useSortEmallProducts } from "@/store/sortEmallProducts";
+import { supabase } from "@/utils/supabaseKey";
 
 export default function EMall() {
     const [storeData, setStoreData] = useState([]);
+
     const [allProducts, setAllProducts] = useState(0);
     const [loading, setLoading] = useState(false);
-
     const limit = 18;
 
     const { currentPage, setCurrentPage } = useMyPagination();
@@ -43,10 +45,11 @@ export default function EMall() {
     const endItem = startItem + limit - 1;
     const allPages = Math.ceil(allProducts / limit);
 
-    const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    );
+
+    const { currentSort } = useSortEmallProducts(state => state)
+
+
+
 
     /* 🔹 وقتی فیلتر تخفیف تغییر می‌کنه → صفحه برگرده 1 */
     useEffect(() => {
@@ -68,7 +71,10 @@ export default function EMall() {
             setAllProducts(count || 0);
         };
 
+
+
         fetchAllDataCount();
+
     }, [currentStatusForCheckBox]);
 
     /* 🔹 گرفتن دیتا بر اساس page */
@@ -84,10 +90,11 @@ export default function EMall() {
           price,
           colors,
           discount,
+          created_at ,
           milad-shop-product-images (
             id,
             image_url
-          )
+          )  
         `)
                 .range(startItem, endItem);
 
@@ -95,14 +102,36 @@ export default function EMall() {
                 query = query.eq("discount", true);
             }
 
+
             const { data } = await query;
+
+
+            // شروع قسمت سورت کردن محصولات
+
+            if (data) {
+                switch (currentSort) {
+                    case "latest":
+                        data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                        break;
+                    case "cheapest":
+                        data.sort((a, b) => a.price - b.price)
+                        break;
+                    case "expensive":
+                        data.sort((a, b) => b.price - a.price)
+                        break;
+
+                }
+            }
+
+            // شروع قسمت سورت کردن محصولات
+
 
             setStoreData(data || []);
             setLoading(false);
         };
 
         fetchData();
-    }, [currentPage, currentStatusForCheckBox, currentColumnBase]);
+    }, [currentPage, currentStatusForCheckBox, currentColumnBase , currentSort]);
 
     return (
         <Container maxWidth="lg" disableGutters>

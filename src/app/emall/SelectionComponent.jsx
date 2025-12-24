@@ -1,35 +1,40 @@
 "use client";
+import { useSortEmallProducts } from "@/store/sortEmallProducts";
 import { ArrowDropDown } from "@mui/icons-material";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useState } from "react";
+
 
 export default function SelectionComponent() {
 
-        const [filter, setFilter] = useState('');
+    const { currentSort, setCurrentSortDefault } = useSortEmallProducts()
 
-    const handleChange = (event) => {
-        setFilter(event.target.value);
-    };
+
 
     return (
         <>
             <Box sx={{ minWidth: 120 }}>
                 <FormControl fullWidth size="small">
-                    <InputLabel id="demo-simple-select-label" size="small" sx={{fontSize : "14px"}}>نمایش  </InputLabel>
+                    <InputLabel id="demo-simple-select-label" size="small" sx={{ fontSize: "12px" }}>نمایش  </InputLabel>
                     <Select
                         IconComponent={ArrowDropDown}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={filter}
+                        value={currentSort}
                         label="Age"
-                        onChange={handleChange}
+                        MenuProps={{ disableScrollLock: true, disablePortal: true }}
+
+                        onChange={(e) => setCurrentSortDefault(e.target.value)}
+                        sx={{
+                            "& .MuiSelect-select": {
+                                fontSize: "12px",   // 👈 متن انتخاب‌شده
+                            }
+                        }}
                     >
-                        <MenuItem value={"latest"}>جدیدترین</MenuItem>
-                        <MenuItem value={"popular"}>محبوب ترین</MenuItem>
-                        <MenuItem value={"most-visited"}>پربازدید ترین</MenuItem>
-                        <MenuItem value={"most-selling"}>پرفروش ترین</MenuItem>
-                        <MenuItem value={"cheapest"}>کمترین قیمت</MenuItem>
-                        <MenuItem value={"expensive"}>بیشترین قیمت</MenuItem>
+                        <MenuItem value={"all"} sx={{ fontSize: "12px" }}>همه</MenuItem>
+                        <MenuItem value={"latest"} sx={{ fontSize: "12px" }}>جدیدترین</MenuItem>
+
+                        <MenuItem value={"cheapest"} sx={{ fontSize: "12px" }}>کمترین قیمت</MenuItem>
+                        <MenuItem value={"expensive"} sx={{ fontSize: "12px" }}>بیشترین قیمت</MenuItem>
                     </Select>
                 </FormControl>
             </Box>

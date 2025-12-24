@@ -1,39 +1,59 @@
-"use client"
-// app/loading.js
-import { Box, Container, Skeleton, Grid } from "@mui/material";
+"use client";
+import { Box, Skeleton, CircularProgress } from "@mui/material";
 
 export default function Loading() {
     return (
-        <Container maxWidth="xl" sx={{ py: 4 }}>
-            {/* اسلایدر اصلی */}
-            <Skeleton variant="rectangular" sx={{ borderRadius: 2, mb: 6, height: "60vh" }} />
+        <Box
+            sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "flex-start",
+                flexWrap: "wrap",
+                gap: 2,
+                py: 2,
+            }}
+        >
+            {Array.from({ length: 18 }).map((_, index) => (
+                <Box
+                    key={index}
+                    sx={{
+                        width: 220,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 1,
+                    }}
+                >
+                    {/* تصویر کارت */}
+                    <Box sx={{ position: "relative" }}>
+                        <Skeleton
+                            variant="rectangular"
+                            height={260}
+                            animation="wave"
+                            sx={{ borderRadius: 2 }}
+                        />
 
-            {/* پیشنهاد ویژه */}
-            <Skeleton variant="text" sx={{ mb: 4, height: "10vh" }} />
+                        {/* spinner وسط کارت */}
+                        <Box
+                            sx={{
+                                position: "absolute",
+                                inset: 0,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+                            <CircularProgress size={28} />
+                        </Box>
+                    </Box>
 
-            {/* دسته‌بندی‌ها */}
-            <Grid container spacing={3} sx={{ mb: 6, height: "10vh" }}>
-                {[...Array(6)].map((_, i) => (
-                    <Grid item xs={6} sm={4} md={2} key={i}>
-                        <Skeleton variant="circular" width={100} height={100} sx={{ mx: "auto" }} />
-                        <Skeleton variant="text" sx={{ mt: 1 }} />
-                    </Grid>
-                ))}
-            </Grid>
+                    {/* عنوان */}
+                    <Skeleton height={24} />
 
-            {/* محصولات محبوب */}
-            <Skeleton variant="text" height={60} sx={{ mb: 4 }} />
-            <Grid container spacing={3}>
-                {[...Array(8)].map((_, i) => (
-                    <Grid item xs={6} sm={4} md={3} key={i}>
-                        <Skeleton variant="rectangular" height={300} sx={{ borderRadius: 2 }} />
-                        <Skeleton variant="text" sx={{ mt: 2 }} />
-                        <Skeleton variant="text" width="60%" />
-                    </Grid>
-                ))}
-            </Grid>
-
-            {/* بقیه بخش‌ها هم می‌تونی skeleton بذاری */}
-        </Container>
+                    {/* قیمت */}
+                    <Skeleton width="60%" height={24} />
+                </Box>
+            ))}
+        </Box>
     );
 }
