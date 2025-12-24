@@ -1,24 +1,28 @@
+import { useBrandsFilter } from "@/store/useBrandsFilter";
 import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
 import { Box, Checkbox, FormControlLabel, FormGroup, Typography } from "@mui/material";
 
 export default function BrandsFilter() {
+
+    const { currentBrnad, setCurrentBrand } = useBrandsFilter();
+
     const brandsList = [
+
         { id: 1, name: "Fendi", countOfProducts: 7 },
-        { id: 2, name: "Addias", countOfProducts: 5 },
-        { id: 3, name: "Celin", countOfProducts: 4 },
-        { id: 4, name: "M&L", countOfProducts: 11 },
-        { id: 5, name: "Fila", countOfProducts: 3 },
-        { id: 6, name: "GAP", countOfProducts: 5 },
-        { id: 7, name: "H&M", countOfProducts: 22 },
+        { id: 2, name: "VanCe", countOfProducts: 5 },
+        { id: 3, name: "Slighter", countOfProducts: 4 },
+        { id: 4, name: "Banoo", countOfProducts: 11 },
+        { id: 5, name: "versace", countOfProducts: 3 },
+        { id: 6, name: "Novin", countOfProducts: 5 },
+        { id: 7, name: "POLO", countOfProducts: 22 },
         { id: 8, name: "Kappa", countOfProducts: 12 },
-        { id: 9, name: "Levis", countOfProducts: 14 },
+        { id: 9, name: "UTOPIA", countOfProducts: 14 },
         { id: 10, name: "Lacoste", countOfProducts: 5 },
-        { id: 11, name: "Carlos", countOfProducts: 24 },
-        { id: 12, name: "Valentino", countOfProducts: 18 },
-        { id: 13, name: "Unique", countOfProducts: 3 },
-        { id: 14, name: "Zara", countOfProducts: 15 },
-        { id: 15, name: "Masimo Dutti", countOfProducts: 11 },
-        { id: 16, name: "Milad", countOfProducts: 32 },
+        { id: 11, name: "Mock-Up", countOfProducts: 24 },
+        { id: 12, name: "Big", countOfProducts: 18 },
+        { id: 13, name: "Mussimo Dutti", countOfProducts: 3 },
+        { id: 14, name: "CaVa", countOfProducts: 15 },
+        { id: 16, name: "Gucci", countOfProducts: 32 },
     ]
     return (
         <>
@@ -26,8 +30,32 @@ export default function BrandsFilter() {
 
                 برند
             </Typography>
-            <Box sx={{ width: "100%",  display: "flex", justifyContent: "center" }}>
+            <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
                 <FormGroup sx={{ width: "90%", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+
+                                    checked={currentBrnad === "all" ? true : false}
+                                    onChange={() => setCurrentBrand("all")}
+                                    sx={{ color: "#000", '& .MuiSvgIcon-root': { fontSize: 22 } }}
+                                />
+                            }
+                            label={
+                                <span>
+                                    {"همه"}
+                                </span>
+                            }
+                            sx={{
+
+                                "& .MuiFormControlLabel-label": { fontSize: "14px" },
+                                "&:hover .MuiFormControlLabel-label": { color: "tomato" },
+                                "&:hover .MuiCheckbox-root": { color: "tomato" }
+                            }}
+                        />
+
+                    </Box>
                     {brandsList.map((item) => {
                         return (
                             <Box key={item.id} sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
@@ -35,8 +63,8 @@ export default function BrandsFilter() {
                                     control={
                                         <Checkbox
 
-                                            checked={""}
-
+                                            checked={currentBrnad === item.name ? true : false}
+                                            onChange={(e) => setCurrentBrand(item.name)}
                                             sx={{ color: "#000", '& .MuiSvgIcon-root': { fontSize: 22 } }}
                                         />
                                     }
