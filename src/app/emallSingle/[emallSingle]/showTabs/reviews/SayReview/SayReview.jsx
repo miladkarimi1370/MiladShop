@@ -43,7 +43,7 @@ export default function SayReview() {
                     mb: 1
                 }}
             >
-                برای تی شرت دخترانه نظر خود را ثبت نمائید
+                برای محصول انتخاب شده نظر خود را ثبت نمائید
             </Typography>
 
             <Typography
@@ -72,7 +72,7 @@ export default function SayReview() {
                     component="legend"
                     sx={{ color: "grey", fontSize: "14px", px: 2 }}
                 >
-                    لطفا به کالای تی شرت دخترانه امتیاز دهید :
+                    لطفا به محصول مورد نظر امتیاز دهید
                 </Typography>
 
                 <Rating
@@ -120,20 +120,21 @@ export default function SayReview() {
                             display: "flex",
                             border: "1px solid #cecece",
                             borderRadius: "7px",
-                            alignItems: "center"
+                            alignItems: "center" , 
+                            
                         }}
                     >
                         <Box
                             component="img"
                             src="/images/avatar/1.png"
-                            sx={{ width: 40, height: 40, objectFit: "cover" }}
+                            sx={{ width: 40, height: 40, objectFit: "cover"  }}
                         />
 
                         <Button
                             sx={{ m: 1, color: "grey", border: "1px solid #cecece" }}
                             component="label"
                             variant="outlined"
-                            startIcon={<CloudUpload />}
+                            startIcon={<CloudUpload sx={{mx : 1}} />}
                         >
                             آپلود عکس
                             <VisuallyHiddenInput

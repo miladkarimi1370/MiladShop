@@ -3,7 +3,7 @@ import ShowRateOfProduct from "./showRateOfProduct/ShowRateOfProduct";
 import Review from "./review/Review";
 import SayReview from "./SayReview/SayReview";
 
-export default function Reviews() {
+export default function Reviews({ allReviews }) {
   return (
     <Box
       sx={{
@@ -15,10 +15,10 @@ export default function Reviews() {
       }}
     >
       {/* قسمت اول: امتیاز */}
-      <ShowRateOfProduct />
+      <ShowRateOfProduct allReviews={allReviews} />
 
       {/* قسمت دوم: نظرات کاربران */}
-      <Review />
+      <Review allReviews={allReviews} />
 
       {/* قسمت سوم: ثبت نظر */}
       <SayReview />

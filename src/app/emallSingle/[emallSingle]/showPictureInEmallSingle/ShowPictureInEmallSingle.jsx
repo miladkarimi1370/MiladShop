@@ -6,8 +6,11 @@ import { useRef, useState } from "react";
 import FullScreenPicture from "./FullScreenPicture";
 
 export default function ShowPictureInEmallSingle({ srcOfImages }) {
+
+
+
   const [showNavigator, setShowNavigator] = useState(false);
-  const [changeSrcOfPicture, setChangeSrcOfPicture] = useState(srcOfImages[0]);
+  const [changeSrcOfPicture, setChangeSrcOfPicture] = useState(srcOfImages[0].image_url);
   const myRefIndex = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -28,7 +31,7 @@ export default function ShowPictureInEmallSingle({ srcOfImages }) {
 
   const handleMouseLeave = () => {
     setShowNavigator(false);
-    setChangeSrcOfPicture(srcOfImages[myRefIndex.current ?? 0]);
+    setChangeSrcOfPicture(srcOfImages[myRefIndex.current ?? 0].image_url);
     setPositionOfImg({
       position: "static",
       transform: "scale(1) translate(0px,0px)",
@@ -52,7 +55,7 @@ export default function ShowPictureInEmallSingle({ srcOfImages }) {
   const handleChangePicture = (number) => {
     myRefIndex.current = number;
     setSelectedIndex(number);
-    setChangeSrcOfPicture(srcOfImages[number]);
+    setChangeSrcOfPicture(srcOfImages[number].image_url);
   };
 
   const handleChangePictureWithArrow = (direction) => {
@@ -64,7 +67,7 @@ export default function ShowPictureInEmallSingle({ srcOfImages }) {
     }
     setSelectedIndex(newIndex);
     myRefIndex.current = newIndex;
-    setChangeSrcOfPicture(srcOfImages[newIndex]);
+    setChangeSrcOfPicture(srcOfImages[newIndex].image_url);
   };
 
   return (
@@ -100,7 +103,7 @@ export default function ShowPictureInEmallSingle({ srcOfImages }) {
           />
         </Fade>
 
-        <FullScreenPicture srcOfImg={srcOfImages[selectedIndex]} />
+        <FullScreenPicture srcOfImg={srcOfImages[selectedIndex].image_url} />
 
         {showNavigator && (
           <>
@@ -108,13 +111,14 @@ export default function ShowPictureInEmallSingle({ srcOfImages }) {
               sx={{ position: "absolute", top: "50%", left: "5%" }}
               onClick={() => handleChangePictureWithArrow("forward")}
             >
-              <ArrowForwardIosRoundedIcon />
+              <ArrowBackIosRoundedIcon />
             </IconButton>
             <IconButton
               sx={{ position: "absolute", top: "50%", right: "5%" }}
               onClick={() => handleChangePictureWithArrow("backward")}
             >
-              <ArrowBackIosRoundedIcon />
+              <ArrowForwardIosRoundedIcon />
+
             </IconButton>
           </>
         )}
@@ -132,9 +136,9 @@ export default function ShowPictureInEmallSingle({ srcOfImages }) {
       }}>
         {srcOfImages.map((item, index) => (
           <Box
-            key={index}
+            key={item.id}
             component="img"
-            src={item}
+            src={item.image_url}
             sx={{
               border: selectedIndex === index ? "1px solid black" : "none",
               width: "23%",

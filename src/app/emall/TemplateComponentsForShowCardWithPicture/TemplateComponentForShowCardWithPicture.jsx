@@ -13,11 +13,11 @@ export default function TemplateComponentForShowCardWithPicture({ myData, allPro
             <Container maxWidth={"xl"} sx={{ display: "flex", justifyContent: "center", alignItems: "center", my: 2 }}>
                 <Box sx={{ width: "100%" }}>
 
-                    <Box sx={{ width: "100%", height: "auto", display: "flex", justifyContent: "space-evenly", alignItems: "center", flexWrap: "wrap"}}>
+                    <Box sx={{ width: "100%", height: "auto", display: "flex", justifyContent: "space-evenly", alignItems: "center", flexWrap: "wrap" }}>
                         {/* کامپونتنت اصلی  */}
                         {myData.map((item) => {
                             return (
-                                <TemplateComponentForShowCardSingle key={item.id} title={item.name} href={"milad"} price={item.price} src={item["milad-shop-product-images"]} />
+                                <TemplateComponentForShowCardSingle product_id={item.id} key={item.id} title={item.name}  price={item.price} src={item["milad-shop-product-images"]} />
                             )
                         })}
 

@@ -1,9 +1,17 @@
+"use client";
 import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
 import { Box, LinearProgress, Rating, Stack, Typography } from "@mui/material";
 
-export default function ShowRateOfProduct() {
-    const votes = [0, 0, 0, 0, 0]; // تعداد رای هر ستاره
-    const totalVotes = votes.reduce((acc, val) => acc + val, 0);
+export default function ShowRateOfProduct({ allReviews }) {
+    let votes = [0, 0, 0, 0, 0, 0]; // تعداد رای هر ستاره
+    console.log(allReviews);
+    allReviews.forEach((element) => {
+        votes[element.rate] += 1
+    });
+
+    const totalVotes = allReviews.reduce((acc, val) => acc + val.rate, 0);
+
+
     const averageRating = totalVotes > 0 ? (votes.reduce((acc, val, index) => acc + val * (5 - index), 0) / totalVotes) : 0;
     return (
         <>
@@ -19,7 +27,7 @@ export default function ShowRateOfProduct() {
 
                 <Stack spacing={1} sx={{ width: "80%" }}>
                     {votes.map((voteCount, index) => {
-                        const starNumber = 5 - index;
+                        const starNumber =  index;
                         const progressValue = totalVotes > 0 ? (voteCount / totalVotes) * 100 : 0;
 
                         return (
@@ -30,7 +38,7 @@ export default function ShowRateOfProduct() {
                                 spacing={1}
                                 sx={{ justifyContent: "flex-start" }}
                             >
-                                {/* ستاره ها */}
+                        
                                 <Rating
                                     name={`read-only-${starNumber}`}
                                     value={starNumber}
@@ -39,14 +47,14 @@ export default function ShowRateOfProduct() {
                                     sx={{ color: "#000", minWidth: 80 }}
                                 />
 
-                                {/* Progress */}
+               
                                 <LinearProgress
                                     variant="determinate"
                                     value={progressValue}
                                     sx={{ height: 10, borderRadius: 5, bgcolor: "#cecece", width: "60%" }}
                                 />
 
-                                {/* نمایش تعداد رای (همه صفر) */}
+                
                                 <Typography variant="body2" sx={{ width: 30, textAlign: "right" }}>
                                     {ChangeNumberToPersianForPhone(voteCount)}
                                 </Typography>

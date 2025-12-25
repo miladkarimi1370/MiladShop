@@ -9,8 +9,10 @@ import ChangeNumbersToPersina from "@/tools/changeNumbersToPersian";
 import { useState } from "react";
 import { useTheShapeOfShowCards } from "@/store/useTheShapeOfShowCards";
 
-export default function TemplateComponentForShowCardSingle({ title, href, src, price }) {
-    const { currentColumnBase, setCurrentColumnBase } = useTheShapeOfShowCards();
+export default function TemplateComponentForShowCardSingle({ title, src, price, product_id }) {
+   
+
+    const { currentColumnBase } = useTheShapeOfShowCards();
 
     const [isHover, setIsHover] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(null);
@@ -32,17 +34,18 @@ export default function TemplateComponentForShowCardSingle({ title, href, src, p
                 p: { xl: 1, default: 0 },
 
             }}>
-                <Card component={Link} href={href} sx={{ textDecoration: "none", color: "inherit", position: "relative", width: "100%" }}>
+                <Card component={Link} href={`/emallSingle/${product_id}`} sx={{ textDecoration: "none", color: "inherit", position: "relative", width: "100%" }}>
                     <CardActionArea
                         disableRipple
                         component={"div"}
+
                         sx={{
-                            
+
                             "&:hover": { backgroundColor: "transparent !important" },
                             "& .MuiCardActionArea-focusHighlight": { backgroundColor: "transparent" }
                         }}
                     >
-                        <Box sx={{ position: "relative"  }}>
+                        <Box sx={{ position: "relative" }}>
                             <CardMedia
                                 onMouseEnter={() => setIsHover(true)}
                                 onMouseLeave={() => setIsHover(false)}

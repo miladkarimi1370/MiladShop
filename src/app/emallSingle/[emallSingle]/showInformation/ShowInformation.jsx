@@ -27,14 +27,17 @@ export default function ShowInformation() {
                                 onChange={(e) => setIsFavorite(e.target.checked)} // بروزرسانی state
                                 icon={<FavoriteBorder />}
                                 checkedIcon={<Favorite color="error" />}
+                                sx={{px : 1}}
                             />
                         }
                         slotProps={{
                             typography: {
-                                fontSize: "12px"
+                                fontSize: "12px" , 
+                                
                             }
                         }}
                         sx={{
+                            px : 2 ,
                             transition: "all 0.3s",
                             "&:hover": {
                                 color: "tomato"

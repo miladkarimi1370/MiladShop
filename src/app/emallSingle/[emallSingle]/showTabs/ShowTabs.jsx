@@ -8,7 +8,9 @@ import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
 import ShowTable from "./table/ShowTable";
 import Reviews from "./reviews/Reviews";
 
-export default function BasicTabs() {
+export default function BasicTabs({ details, meterial, sizes, allReviews }) {
+
+
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -26,9 +28,9 @@ export default function BasicTabs() {
 
 
             </Box>
-            {value === 0 && (<Descriptions />)}
+            {value === 0 && (<Descriptions details={details} meterial={meterial} sizes={sizes} />)}
             {value === 1 && (<ShowTable />)}
-            {value === 2 && (<Reviews />)}
+            {value === 2 && (<Reviews allReviews={allReviews} />)}
         </>
     );
 }

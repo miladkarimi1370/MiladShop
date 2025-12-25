@@ -32,7 +32,7 @@ import { usePriceFilter } from "@/store/usePriceFilter";
 import { useColorFilter } from "@/store/colorFilter";
 import { useBrandsFilter } from "@/store/useBrandsFilter";
 import { useSizeFilter } from "@/store/useSizeFilter";
-import { useRateFilter } from "@/store/useRateFilter";
+
 
 export default function EMall() {
     const [storeData, setStoreData] = useState([]);

@@ -9,7 +9,9 @@ import ShowTabs from "./showTabs/ShowTabs";
 
 import InfoBeforeBuyWithTitle from "./inforBeforeBuyWithTitle/InfoBeforeBuyWithTitle";
 
-export default function EMallSingle() {
+export default function EMallSingle({params}) {
+    
+    
     return (
         <Container maxWidth={"lg"}>
             <Box sx={{ width: "100%", display: 'flex', flexWrap: "wrap", justifyContent: "center", alignContent: "center" }}>

@@ -6,7 +6,9 @@ import MotionPhotosOffSharpIcon from '@mui/icons-material/MotionPhotosOffSharp';
 import SignalWifiStatusbarConnectedNoInternet4Icon from '@mui/icons-material/SignalWifiStatusbarConnectedNoInternet4';
 import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
 
-export default function Descriptions() {
+export default function Descriptions({ details, meterial, sizes, }) {
+
+
     return (
         <Box sx={{ width: "100%", px: 2 }}>
             <Box
@@ -41,10 +43,10 @@ export default function Descriptions() {
                                 جزئیات
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column", gap: 1, color: "grey" }}>
-                                <Typography sx={{ fontSize: "14px" }}>یقهٔ باز در پیراهن مردانه</Typography>
-                                <Typography sx={{ fontSize: "14px" }}>لباس دکمه دار</Typography>
-                                <Typography sx={{ fontSize: "14px" }}>جیب دوختی روی سینه</Typography>
-                                <Typography sx={{ fontSize: "14px" }}>آستین بلند</Typography>
+                                {details.map((item, index) => {
+                                    return (<Typography key={index} sx={{ fontSize: "14px" }}>{item}</Typography>)
+                                })}
+
                             </Box>
                         </Box>
 
@@ -55,7 +57,7 @@ export default function Descriptions() {
                                     جنس محصول
                                 </Typography>
                                 <Typography sx={{ fontSize: "14px", color: "grey" }}>
-                                    {ChangeNumberToPersianForPhone(100)} % نخ
+                                    {meterial}
                                 </Typography>
                             </Box>
 
@@ -63,8 +65,11 @@ export default function Descriptions() {
                                 <Typography sx={{ fontSize: "16px", fontWeight: "bold", py: 1 }}>
                                     پوشش
                                 </Typography>
-                                <Typography sx={{ fontSize: "14px", color: "grey" }}>این مدل از سایز متوسط تا سایز بزرگ</Typography>
-                                <Typography sx={{ fontSize: "14px", color: "grey" }}>سایز متوسط</Typography>
+                                {sizes.map((item, index) => {
+                                    return (<Typography key={index} sx={{ fontSize: "14px", color: "grey" }}>{item}</Typography>)
+                                })}
+
+
                             </Box>
                         </Box>
                     </Box>
