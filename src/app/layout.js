@@ -1,9 +1,11 @@
-
+"use client";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
-import ThemeRegistry from "./theme/ThemeRegistery";
 import MyHeader from "./components/header/MyHeader";
 import Footer from "./components/footer/Footer";
+import theme from "./theme/theme";
+import { CssBaseline, ThemeProvider } from '@mui/material';
 
 const vazirmatn = Vazirmatn({
   subsets: ["arabic"],
@@ -11,20 +13,19 @@ const vazirmatn = Vazirmatn({
   display: "swap",
 });
 
-export const metadata = {
-  title: "فروشگاه اینترنتی میلاد",
-  description: "بزرگترین مرجع تخصصی انواع لباس‌های اورجینال در ایران",
-};
-
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
       <body className={vazirmatn.className}>
-        <ThemeRegistry>
-          <MyHeader />
-          {children}
-          <Footer />
-        </ThemeRegistry>
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+
+            <MyHeader />
+            {children}
+            <Footer />
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

@@ -56,7 +56,7 @@ export default function EMall() {
     const { currentBrnad } = useBrandsFilter(state => state)
     const { currentSize } = useSizeFilter(state => state)
 
- 
+
 
 
     /* 🔹 وقتی فیلتر تخفیف تغییر می‌کنه → صفحه برگرده 1 */
@@ -123,7 +123,7 @@ export default function EMall() {
                 query = query.contains("sizes", [currentSize])
             }
 
-         
+
             // شروع قسمت فیلتر کردن بر اساس قیمت
             switch (currentPriceFilter) {
                 case "less200":
@@ -275,6 +275,7 @@ export default function EMall() {
                     >
                         <Box
                             sx={{
+                                my: 4,
                                 width: "80%",
                                 display: "flex",
                                 justifyContent: "center",
@@ -287,7 +288,7 @@ export default function EMall() {
                             <BrandsFilter />
                             <SizeFilter />
                             <Tags />
-                       
+
                         </Box>
                     </Box>
                 </Box>

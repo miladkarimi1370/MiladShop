@@ -281,6 +281,7 @@ export default function ShowProductsAsClientComponent({ category }) {
                     >
                         <Box
                             sx={{
+                                my : 4 ,
                                 width: "80%",
                                 display: "flex",
                                 justifyContent: "center",

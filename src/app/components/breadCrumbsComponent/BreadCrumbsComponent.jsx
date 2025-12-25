@@ -1,5 +1,5 @@
 "use client";
-import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Stack } from "@mui/material";
 import Link from "next/link";
 export default function BreadCrumbsComponents({ arrayOfPath }) {
 
