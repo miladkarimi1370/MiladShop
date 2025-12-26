@@ -59,19 +59,28 @@ export default function TemplateComponentForShowSlider({ sliders }) {
                                                 top: "50%",
 
                                                 left: { xs: "50%", sm: "60%", md: "70%" },
-                                                transform: (item.order_number % 2 === 0 ? "translate(-20%, -50%)" : "translate(-70%, -50%)"),
+                                                transform: {
+                                                    xs: (item.order_number % 2 === 0 ? "translate(-65%, -50%)" : "translate(-65%, -50%)"),
+                                                    sm: (item.order_number % 2 === 0 ? "translate(-120%, -50%)" : "translate(-90%, -50%)"),
+                                                    md: (item.order_number % 2 === 0 ? "translate(-160%, -50%)" : "translate(-100%, -50%)"),
+                                                    lg: (item.order_number % 2 === 0 ? "translate(-150%, -50%)" : "translate(-90%, -50%)"),
+                                                    xl: (item.order_number % 2 === 0 ? "translate(-130%, -50%)" : "translate(-85%, -50%)")
+                                                },
                                                 flexDirection: "column",
                                                 justifyContent: "space-evenly",
                                                 alignItems: "start",
-                                                display: "flex"
+                                                display: "flex",
+
                                             }}>
                                                 <Typography variant='subtitle2' sx={{ color: "grey", ...fadeSlide }}>
                                                     {ChangeNumbersToPersina(item.descriptions)}
                                                 </Typography>
                                                 <Typography variant='h2' sx={{
-                                                    fontSize: { xs: "40px", sm: "50px", lg: "50px", xl: "50px" },
+
+                                                    fontSize: { xs: "20px", sm: "25px", md: "30px", xl: "40px" },
                                                     fontWeight: "bold",
-                                                    width: { xs: "50vw" },
+
+                                                    width: { xs: "300px", sm: "350px", md: "400px", lg: "400px", xl: "550px" },
                                                     ...fadeSlide
                                                 }}>
                                                     {item.title}
@@ -101,8 +110,8 @@ export default function TemplateComponentForShowSlider({ sliders }) {
                     </Swiper>
 
                     {/* Navigation buttons – فقط روی lg به بالا نمایش داده میشه */}
-                    <Box className="swiper-button-next" sx={{ display: { xs: "none", lg: "block" }, right: "100px !important", transform: "translateY(-50%)", color: "#000", "&::after": { fontSize: "30px" } }} />
-                    <Box className="swiper-button-prev" sx={{ display: { xs: "none", lg: "block" }, left: "100px !important", transform: "translateY(-50%)", color: "#000", "&::after": { fontSize: "30px" } }} />
+                    <Box className="swiper-button-next" sx={{ display: { xs: "none", lg: "block" }, left: "100px !important", transform: "translateY(-50%)", color: "#000", "&::after": { fontSize: "30px", fontWeight: "bold" } }} />
+                    <Box className="swiper-button-prev" sx={{ display: { xs: "none", lg: "block" }, right: "100px !important", transform: "translateY(-50%)", color: "#000", "&::after": { fontSize: "30px", fontWeight: "bold" } }} />
 
                 </Box>
             </Container>

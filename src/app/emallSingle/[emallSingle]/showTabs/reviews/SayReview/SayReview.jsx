@@ -85,6 +85,7 @@ export default function SayReview() {
             {/* متن نظر */}
             <Box sx={{ width: "100%", mb: 2 }}>
                 <TextareaAutosize
+                    id="say_comment"
                     minRows={12}
                     placeholder="لطفا نظر خود را درباره کالا ثبت نمائید . . ."
                     style={{
@@ -120,21 +121,21 @@ export default function SayReview() {
                             display: "flex",
                             border: "1px solid #cecece",
                             borderRadius: "7px",
-                            alignItems: "center" , 
-                            
+                            alignItems: "center",
+
                         }}
                     >
                         <Box
                             component="img"
                             src="/images/avatar/1.png"
-                            sx={{ width: 40, height: 40, objectFit: "cover"  }}
+                            sx={{ width: 40, height: 40, objectFit: "cover" }}
                         />
 
                         <Button
                             sx={{ m: 1, color: "grey", border: "1px solid #cecece" }}
                             component="label"
                             variant="outlined"
-                            startIcon={<CloudUpload sx={{mx : 1}} />}
+                            startIcon={<CloudUpload sx={{ mx: 1 }} />}
                         >
                             آپلود عکس
                             <VisuallyHiddenInput
@@ -158,6 +159,7 @@ export default function SayReview() {
                 }}
             >
                 <TextField
+                    id="say_emal"
                     required
                     label="نام"
                     placeholder="نام خود را وارد کنید"
@@ -205,6 +207,7 @@ export default function SayReview() {
 
                 <TextField
                     required
+                    id="say_full_name"
                     label="نام خانوادگی"
                     placeholder="نام خانوادگی خود را وارد کنید"
                     value={state.lastName}

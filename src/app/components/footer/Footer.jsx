@@ -248,6 +248,7 @@ export default function Footer() {
                   }}
                 >
                   <TextField
+                  id="say_email_for_Footer"
                     size="small"
                     placeholder="ایمیل خود را وارد کنید"
                     variant="outlined"
