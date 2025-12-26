@@ -11,6 +11,7 @@ export default function ShowBrands() {
           display: "flex",
           justifyContent: "space-evenly",
           alignItems: "center",
+         
           minHeight: 140,          // ⭐ ثابت، نه VH
           flexWrap: "nowrap",
           gap: 2,

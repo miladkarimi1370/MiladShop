@@ -17,7 +17,7 @@ export default function TemplateComponentForPictures({ href, mySrc, title }) {
                 onMouseLeave={() => setIsBlock(false)}
 
             >
-                <Link href={href} style={{ display: "block", width: "100%" }}>
+                <Link href={href} style={{ display: "block", width: "100%" }} target="_blank">
                     <Box sx={{ width: "100%", height: "30vh", position: "relative", overflow: "hidden" }}>
                         <Image
                             src={mySrc}

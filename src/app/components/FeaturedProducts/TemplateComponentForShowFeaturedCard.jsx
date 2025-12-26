@@ -11,12 +11,12 @@ import { useState } from "react";
 import TemplateComponentsForShowColors from "./TemplateComponentsForShowColors";
 
 
-export default function TemplateComponentForShowFeaturedCards({ title, href, src, price, colorsOfProduct }) {
+export default function TemplateComponentForShowFeaturedCards({ id, title, src, price, colorsOfProduct }) {
 
     const [isHover, setIsHover] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(null);
 
-    
+
     const currentIndex = isHover
         ? 1 // وقتی موس روی کارت هست
         : selectedIndex !== null
@@ -36,7 +36,7 @@ export default function TemplateComponentForShowFeaturedCards({ title, href, src
     return (
         <>
             <Box sx={{ width: isXs ? "48%" : isMd ? "33%" : isLg ? "25%" : "25%", height: "100%", my: 1, p: isXl ? 1 : 0 }}>
-                <Card component={Link} href={href} sx={{ textDecoration: "none", color: "inherit", position: "relative", width: "50%" }}>
+                <Card component={Link} href={`/emallSingle/${id}`} sx={{ textDecoration: "none", color: "inherit", position: "relative", width: "50%" }}>
                     <CardActionArea
                         disableRipple
                         component={"div"} sx={{
@@ -120,12 +120,14 @@ export default function TemplateComponentForShowFeaturedCards({ title, href, src
                             </Box>
 
                         </Box>
-                        <Box sx={{ width: "100%", height: "10vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                        <Box sx={{ width: "100%",  display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                             <Typography variant="subtitle1" sx={{
 
                                 textAlign: "center",
                                 transition: "all linear 0.2s",
-                                color: "#000", fontSize: "14px", "&:hover": {
+                                width : "80%" , 
+                                my : 1 ,
+                                color: "#000", fontSize: {xs : "12px" , sm : "12px" , md : "14px"}, "&:hover": {
                                     color: "tomato"
                                 },
 

@@ -16,6 +16,8 @@ import TemplateComponentForShowClothes from './TemplateComponentForShowClothes';
 const OurCategoriesSlider = ({ categoryData }) => {
 
 
+
+
     const isXs = useMediaQuery(theme.breakpoints.only("xs"));
     const isSm = useMediaQuery(theme.breakpoints.only("sm"));
     const isMd = useMediaQuery(theme.breakpoints.only("md"));
@@ -38,10 +40,10 @@ const OurCategoriesSlider = ({ categoryData }) => {
                 className="mySwiper"
                 style={{ cursor: "pointer", height: "100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
             >
-                
+
                 {[...categoryData].map((item) => {
                     return <SwiperSlide style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                        <TemplateComponentForShowClothes key={item.id} href={"milad"} mySrc={item.image_url} title={item.title} count={item.category_count} />
+                        <TemplateComponentForShowClothes key={item.id} href={item.slug} mySrc={item.image_url} title={item.title} count={item.category_count} />
                     </SwiperSlide>
 
                 })}

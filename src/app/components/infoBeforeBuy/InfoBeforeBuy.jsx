@@ -36,7 +36,7 @@ export default function InfoBeforeBuy() {
                             "&:hover": { color: "grey", transform: "scale(0.9)" }
                         }} />
                         <Box>
-                            <Typography sx={{ fontSize: "16px", color: "#000", textAlign: { xs: "start", md: "center" }, my: { xs: "auto", md: 1 } }}>
+                            <Typography sx={{ fontSize: "16px", color: "#000", textAlign: "center", my: { xs: "auto", md: 1 } }}>
                                 ارسال رایگان ، مرجوعی
                             </Typography>
                             <Typography sx={{ fontSize: "14px", color: "grey", fontWeight: 200, textAlign: { xs: "start", md: "center" } }}>
@@ -58,7 +58,7 @@ export default function InfoBeforeBuy() {
                             "&:hover": { color: "grey", transform: "scale(0.9)" }
                         }} />
                         <Box>
-                            <Typography sx={{ fontSize: "16px", color: "#000", textAlign: { xs: "start", md: "center" }, my: { xs: "auto", md: 1 } }}>
+                            <Typography sx={{ fontSize: "16px", color: "#000", textAlign: "center", my: { xs: "auto", md: 1 } }}>
                                 پشتیبانی {ChangeNumberToPersianForPhone(24)} ساعته
                             </Typography>
                             <Typography sx={{ fontSize: "14px", color: "grey", fontWeight: 200, textAlign: { xs: "start", md: "center" } }}>
@@ -80,7 +80,7 @@ export default function InfoBeforeBuy() {
                             "&:hover": { color: "grey", transform: "scale(0.9)" }
                         }} />
                         <Box>
-                            <Typography sx={{ fontSize: "16px", color: "#000", textAlign: { xs: "start", md: "center" }, my: { xs: "auto", md: 1 } }}>
+                            <Typography sx={{ fontSize: "16px", color: "#000", textAlign: "center", my: { xs: "auto", md: 1 } }}>
                                 {ChangeNumberToPersianForPhone(100)} % پرداخت امن
                             </Typography>
                             <Typography sx={{ fontSize: "14px", color: "grey", fontWeight: 200, textAlign: { xs: "start", md: "center" } }}>

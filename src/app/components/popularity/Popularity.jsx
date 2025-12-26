@@ -75,7 +75,7 @@ export default async function Popularity() {
                         {/* کامپونتنت اصلی  */}
                         {popularProducts.map((item) => {
                             return (
-                                <TemplateComponentForShowCard id={item.id} key={item.id} title={item.name} href={"milad"} price={item.price} colorsOfProduct={item.colors} src={item['milad-shop-product-images']} />
+                                <TemplateComponentForShowCard id={item.id} key={item.id} title={item.name}  price={item.price} colorsOfProduct={item.colors} src={item['milad-shop-product-images']} />
                             )
                         })}
 

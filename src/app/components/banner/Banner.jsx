@@ -87,7 +87,8 @@ export default async function Banner() {
                     <Typography
                         variant="body1"
                         component={NextLink}
-                        href={""}
+                        href={"/emall"}
+                        target="_blank"
                         sx={{ borderBottom: "1px solid #000", textAlign: "center", mt: 1 }}
                     >
                         {myData[0].button_text}

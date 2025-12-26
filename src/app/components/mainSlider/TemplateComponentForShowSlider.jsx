@@ -1,121 +1,175 @@
 "use client";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { fadeSlide } from "./animationForSlidersTitle";
-import { Pagination, Navigation, EffectFade, Autoplay } from "swiper/modules"
-import { Box, Card, CardMedia, Container, Typography } from '@mui/material';
-import ArrowCircleRightRoundedIcon from '@mui/icons-material/ArrowCircleRightRounded';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import "swiper/css/effect-fade";
-import "swiper/css/autoplay";
-import Link from 'next/link';
-import ChangeNumbersToPersina from '@/tools/changeNumbersToPersian';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, EffectFade, Autoplay } from "swiper/modules";
+import { Box, Card, Typography } from "@mui/material";
+import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRounded";
 
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/effect-fade";
+
+import Link from "next/link";
+import ChangeNumbersToPersina from "@/tools/changeNumbersToPersian";
 
 export default function TemplateComponentForShowSlider({ sliders }) {
-
     return (
-        <>
-            <Container maxWidth={"xl"} sx={{ display: "flex", justifyContent: "center", alignItems: "start" }}>
-                <Box sx={{
-                    maxWidth: "1900px",
-                    height: { xs: "310px", md: "420px", lg: "520px", xl: "600px" },
-                    cursor: "pointer",
-                    position: "relative",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "start"
-                }}>
-                    <Swiper
-                        spaceBetween={30}
-                        effect={"fade"}
-                        pagination={{ clickable: true }}
-                        loop={true}
-                        modules={[EffectFade, Navigation, Pagination, Autoplay]}
-                        autoplay={{ delay: 5500, disableOnInteraction: false }}
-                        navigation={{ nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }}
-                        dir='rtl'
-                        style={{ width: "100%", height: "100%" }}
-                    >
+        <Box
+            sx={{
+                width: "100vw",
+                position: "relative",
+                overflow: "hidden",
+            }}
+        >
+            <Swiper
+                spaceBetween={0}
+                effect="fade"
+                loop
+                dir="rtl"
+                pagination={{ clickable: true }}
+                autoplay={{ delay: 4500, disableOnInteraction: false }}
+                navigation={{ nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }}
+                modules={[EffectFade, Navigation, Pagination, Autoplay]}
+                style={{ width: "100%", height: "100%" }}
+            >
+                {sliders?.map((item) => (
+                    <SwiperSlide key={item.id}>
+                        <Card
+                            sx={{
+                                width: "100%",
+                                borderRadius: 0,
+                                height: {
+                                    xs: "260px",
+                                    sm: "340px",
+                                    md: "440px",
+                                    lg: "520px",
+                                    xl: "620px",
+                                },
+                                position: "relative",
+                            }}
+                        >
+                            {/* تصویر */}
+                            <img
+                                src={item.image_url}
+                                alt={item.title}
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    objectPosition: "center",
+                                    display: "block",
+                                }}
+                            />
 
-                        {/* شروع آرایه اسلایدرها */}
-                        {
-                            sliders && sliders.map((item) => {
-                                return (
-                                    <SwiperSlide key={item.id}>
-                                        <Card sx={{ width: "100%", height: "100%", position: "relative", aspectRatio: "16/9" }}>
-                                            <CardMedia
-                                                sx={{ height: "100%", objectFit: "cover" }}
-                                                image={item.image_url}
-                                                title={item.title}
-                                            />
-                                            <Box sx={{
+                            {/* باکس متن + شرط‌های قبلیت */}
+                            <Box
+                                sx={{
+                                    position: "absolute",
+                                    top: "50%",
 
-                                                width: { xs: "70vw", md: "70vw" },
-                                                height: "15vh",
-                                                position: "absolute",
-                                                top: "50%",
+                                    left: {
+                                        xs: "50%",
+                                        sm: "60%",
+                                        md: "70%",
+                                    },
 
-                                                left: { xs: "50%", sm: "60%", md: "70%" },
-                                                transform: {
-                                                    xs: (item.order_number % 2 === 0 ? "translate(-65%, -50%)" : "translate(-65%, -50%)"),
-                                                    sm: (item.order_number % 2 === 0 ? "translate(-120%, -50%)" : "translate(-90%, -50%)"),
-                                                    md: (item.order_number % 2 === 0 ? "translate(-160%, -50%)" : "translate(-100%, -50%)"),
-                                                    lg: (item.order_number % 2 === 0 ? "translate(-150%, -50%)" : "translate(-90%, -50%)"),
-                                                    xl: (item.order_number % 2 === 0 ? "translate(-130%, -50%)" : "translate(-85%, -50%)")
-                                                },
-                                                flexDirection: "column",
-                                                justifyContent: "space-evenly",
-                                                alignItems: "start",
-                                                display: "flex",
+                                    transform: {
+                                        xs:
+                                            item.order_number % 2 === 0
+                                                ? "translate(-80%, -50%)"
+                                                : "translate(-45%, -50%)",
+                                        sm:
+                                            item.order_number % 2 === 0
+                                                ? "translate(-105%, -50%)"
+                                                : "translate(-75%, -50%)",
+                                        md:
+                                            item.order_number % 2 === 0
+                                                ? "translate(-120%, -50%)"
+                                                : "translate(-80%, -50%)",
+                                        lg:
+                                            item.order_number % 2 === 0
+                                                ? "translate(-120%, -50%)"
+                                                : "translate(-90%, -50%)",
+                                        xl:
+                                            item.order_number % 2 === 0
+                                                ? "translate(-130%, -50%)"
+                                                : "translate(-85%, -50%)",
+                                    },
 
-                                            }}>
-                                                <Typography variant='subtitle2' sx={{ color: "grey", ...fadeSlide }}>
-                                                    {ChangeNumbersToPersina(item.descriptions)}
-                                                </Typography>
-                                                <Typography variant='h2' sx={{
+                                    width: { xs: "70vw", md: "70vw" },
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "space-evenly",
+                                    alignItems: "start",
+                                    gap: 1,
+                                }}
+                            >
+                                {/* subtitle خاکستری */}
+                                <Typography variant="subtitle2" sx={{ color: "grey" }}>
+                                    {ChangeNumbersToPersina(item.descriptions)}
+                                </Typography>
 
-                                                    fontSize: { xs: "20px", sm: "25px", md: "30px", xl: "40px" },
-                                                    fontWeight: "bold",
+                                {/* title مشکی */}
+                                <Typography
+                                    variant="h2"
+                                    sx={{
+                                        color: "#000",
+                                        fontWeight: "bold",
+                                        fontSize: {
+                                            xs: "20px",
+                                            sm: "25px",
+                                            md: "30px",
+                                            xl: "40px",
+                                        },
+                                        width: {
+                                            xs: "200px",
+                                            sm: "300px",
+                                            md: "400px",
+                                            lg: "400px",
+                                            xl: "550px",
+                                        },
+                                    }}
+                                >
+                                    {item.title}
+                                </Typography>
 
-                                                    width: { xs: "300px", sm: "350px", md: "400px", lg: "400px", xl: "550px" },
-                                                    ...fadeSlide
-                                                }}>
-                                                    {item.title}
-                                                </Typography>
-                                                <Link href={""}>
-                                                    <Typography sx={{
-                                                        display: "flex",
-                                                        justifyContent: "space-between",
-                                                        alignItems: "center",
-                                                        transition: "all 0.1s ease-in-out",
-                                                        "&:hover": { color: "tomato", fontWeight: "bold" },
-                                                        ...fadeSlide
-                                                    }}>
-                                                        {item.button_text}
-                                                        <ArrowCircleRightRoundedIcon sx={{ color: "green", px: 1 }} />
-                                                    </Typography>
-                                                </Link>
-                                            </Box>
-                                        </Card>
-                                    </SwiperSlide>
-                                )
-                            })
-                        }
-                        {/* پایان آرایه اسلایدرها */}
+                                {/* 🔙 دکمه + متن + آیکن برگشت */}
+                                <Link href="/emall">
+                                    <Typography
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: 1,
+                                            transition: "all .15s ease",
+                                            "&:hover": { color: "tomato", fontWeight: "bold" },
+                                        }}
+                                    >
+                                        {item.button_text}
+                                        <ArrowCircleRightRoundedIcon sx={{color : "green"}} />
+                                    </Typography>
+                                </Link>
+                            </Box>
+                        </Card>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
 
-
-                    </Swiper>
-
-                    {/* Navigation buttons – فقط روی lg به بالا نمایش داده میشه */}
-                    <Box className="swiper-button-next" sx={{ display: { xs: "none", lg: "block" }, left: "100px !important", transform: "translateY(-50%)", color: "#000", "&::after": { fontSize: "30px", fontWeight: "bold" } }} />
-                    <Box className="swiper-button-prev" sx={{ display: { xs: "none", lg: "block" }, right: "100px !important", transform: "translateY(-50%)", color: "#000", "&::after": { fontSize: "30px", fontWeight: "bold" } }} />
-
-                </Box>
-            </Container>
-
-        </>
-    )
+            {/* دکمه‌های ناوبری */}
+            <Box
+                className="swiper-button-next"
+                sx={{
+                    display: { xs: "none", lg: "block" , transform : "translateX(50px)" },
+                    "&::after": { fontSize: "30px", fontWeight: "bold" },
+                }}
+            />
+            <Box
+                className="swiper-button-prev"
+                sx={{
+                    display: { xs: "none", lg: "block" , transform : "translateX(-50px)" },
+                    "&::after": { fontSize: "30px", fontWeight: "bold" },
+                }}
+            />
+        </Box>
+    );
 }

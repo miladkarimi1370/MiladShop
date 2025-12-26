@@ -10,7 +10,7 @@ import ChangeNumbersToPersina from "@/tools/changeNumbersToPersian";
 import ColorsForProducts from "./ColorsForProducts";
 import { useState } from "react";
 
-export default function TemplateComponentForShowCard({ id, title, href, src, price, colorsOfProduct }) {
+export default function TemplateComponentForShowCard({ id, title, src, price, colorsOfProduct }) {
     const [isHover, setIsHover] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(null);
 
@@ -38,7 +38,7 @@ export default function TemplateComponentForShowCard({ id, title, href, src, pri
             my: 1,
             p: { xs: 0, xl: 1 }
         }}>
-            <Card component={Link} href={href} sx={{ textDecoration: "none", color: "inherit", position: "relative", width: "100%" }}>
+            <Card component={Link} href={`/emallSingle/${id}`} sx={{ textDecoration: "none", color: "inherit", position: "relative", width: "100%" }}>
                 <CardActionArea
                     disableRipple
                     component="div"
@@ -47,7 +47,7 @@ export default function TemplateComponentForShowCard({ id, title, href, src, pri
                         "& .MuiCardActionArea-focusHighlight": { backgroundColor: "transparent" }
                     }}
                 >
-                    <Box sx={{ position: "relative" }}>
+                    <Box sx={{ position: "relative"  }}>
                         <CardMedia
                             onMouseEnter={() => setIsHover(true)}
                             onMouseLeave={() => setIsHover(false)}
@@ -55,23 +55,26 @@ export default function TemplateComponentForShowCard({ id, title, href, src, pri
                             key={id}
                             image={src[currentIndex].image_url}
                             alt={title}
-                            sx={{ objectFit: "cover", transition: "all 0.3s ease" }}
+                            sx={{ objectFit: "cover", transition: "all 0.3s ease"  }}
                         />
 
                         {/* آیکون‌ها */}
                         <Box sx={{
+
                             position: "absolute",
-                            top: "5%",
-                            left: "5%",
+                            top: "10%",
+                            left: "4%",
                             display: "flex",
                             flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center",
                             gap: 1
                         }}>
                             {[
-                                { icon: <FavoriteBorderRounded sx={{ transform: "scale(0.7)" }} />, title: "اضافه کردن به علاقمندی ها", onClick: e => e.stopPropagation() },
-                                { icon: <ShoppingBasketOutlinedIcon sx={{ transform: "scale(0.7)" }} />, title: "دیدن جزئیات", onClick: e => { e.preventDefault(); e.stopPropagation(); router.push("/basket"); } },
-                                { icon: <SearchOutlined sx={{ transform: "scale(0.7)" }} />, title: "دیدن سریع جزئیات", onClick: e => e.stopPropagation() },
-                                { icon: <CompareArrowsRoundedIcon sx={{ transform: "scale(0.7)" }} />, title: "مقایسه", onClick: e => e.stopPropagation() },
+                                { icon: <FavoriteBorderRounded sx={{ transform: "scale(0.5)" }} />, title: "اضافه کردن به علاقمندی ها", onClick: e => e.stopPropagation() },
+                                { icon: <ShoppingBasketOutlinedIcon sx={{ transform: "scale(0.5)" }} />, title: "دیدن جزئیات", onClick: e => { e.preventDefault(); e.stopPropagation(); router.push("/basket"); } },
+                                { icon: <SearchOutlined sx={{ transform: "scale(0.5)" }} />, title: "دیدن سریع جزئیات", onClick: e => e.stopPropagation() },
+                                { icon: <CompareArrowsRoundedIcon sx={{ transform: "scale(0.5)" }} />, title: "مقایسه", onClick: e => e.stopPropagation() },
                             ].map((item, idx) => (
                                 <Tooltip key={idx} title={item.title} placement="left-start">
                                     <IconButton
@@ -91,12 +94,14 @@ export default function TemplateComponentForShowCard({ id, title, href, src, pri
                     </Box>
 
                     {/* متن و رنگ‌ها */}
-                    <Box sx={{ width: "100%", height: "10vh", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                    <Box sx={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"  }}>
                         <Typography variant="subtitle1" sx={{
                             textAlign: "center",
                             transition: "all linear 0.2s",
                             color: "#000",
-                            fontSize: "14px",
+                            fontSize: { xs: "12px", sm: "12px", md: "14px" },
+                            width: "80%",
+                            my: 1,
                             "&:hover": { color: "tomato" }
                         }}>
                             {title}
