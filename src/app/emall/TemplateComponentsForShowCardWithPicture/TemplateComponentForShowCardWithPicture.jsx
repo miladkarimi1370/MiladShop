@@ -1,13 +1,20 @@
 "use client";
-import { Box, Container, Divider, Typography } from "@mui/material";
+import { Box, Container, Divider } from "@mui/material";
 import TemplateComponentForShowCardSingle from "./TemplateComponentForShowCardSingle";
-import MyPagination from "../ShowPagination";
-import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
+
+import { useEffect, useState } from "react";
+import PaginationComponent from "./PaginationComponent";
 
 export default function TemplateComponentForShowCardWithPicture({ myData, allProducts, startItem, endItem, allPages }) {
 
-
-
+    const [showLoading, setShowLoading] = useState(true)
+    useEffect(() => {
+        if (!allPages && !allProducts && !startItem && !endItem) {
+            setShowLoading(false)
+        } else {
+            setShowLoading(true)
+        }
+    })
     return (
         <>
             <Container maxWidth={"xl"} sx={{ display: "flex", justifyContent: "center", alignItems: "center", my: 2 }}>
@@ -17,7 +24,7 @@ export default function TemplateComponentForShowCardWithPicture({ myData, allPro
                         {/* کامپونتنت اصلی  */}
                         {myData.map((item) => {
                             return (
-                                <TemplateComponentForShowCardSingle product_id={item.id} key={item.id} title={item.name}  price={item.price} src={item["milad-shop-product-images"]} />
+                                <TemplateComponentForShowCardSingle product_id={item.id} key={item.id} title={item.name} price={item.price} src={item["milad-shop-product-images"]} />
                             )
                         })}
 
@@ -27,16 +34,16 @@ export default function TemplateComponentForShowCardWithPicture({ myData, allPro
 
                     <Divider />
                     {/* شروع pagination */}
-                    <Box sx={{ width: "100%", height: "10vh", display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
-                        <Typography variant="subtitle2" sx={{ width: "100%", color: "grey", textAlign: "center", my: 2 }}>
-                            تعداد  {" "}
-                            {ChangeNumberToPersianForPhone(startItem + 1)} {" "}
-                            الی {(endItem + 1) < allProducts ? ChangeNumberToPersianForPhone(endItem + 1) : ChangeNumberToPersianForPhone(allProducts)} {" "}
-                            محصول از {ChangeNumberToPersianForPhone(allProducts)} {" "}
-                            محصول
-                        </Typography>
-                        <MyPagination allPages={allPages} />
-                    </Box>
+                    {showLoading ? <PaginationComponent allPages={allPages} allProducts={allProducts} startItem={startItem} endItem={endItem} /> : (
+                        <Stack spacing={1}>
+
+
+
+                            <Skeleton variant="circular" width={40} height={40} />
+                            <Skeleton variant="circular" width={40} height={40} />
+
+                        </Stack>
+                    )}
                     {/* پایان pagination */}
                 </Box>
             </Container >

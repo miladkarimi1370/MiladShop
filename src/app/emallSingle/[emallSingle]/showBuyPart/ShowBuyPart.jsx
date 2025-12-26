@@ -1,44 +1,100 @@
 "use client";
-import { Box, Button, FormGroup, IconButton, TextField } from "@mui/material";
+import { Box, Button, FormGroup, IconButton, Snackbar, TextField } from "@mui/material";
 import { useState } from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
+import { CartProduct } from "@/store/CardProduct";
 
 export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProduct }) {
     const [selectedColor, setSelectedColor] = useState(null);
     const [countOfProduct, setCountOfProduct] = useState(0);
-
+    const { myBasket, setMyBasket } = CartProduct();
+    const [showSnackbar, setShowSnackbar] = useState(false)
+    const [commentOfSnackBar, setCommentOfSnackBar] = useState("")
     const handleClicked = (sign) => {
+
         if (sign === "Plus") {
-            if (countOfProduct < max) setCountOfProduct(countOfProduct + 1);
+            setCountOfProduct((prev) => {
+                const newCount = Math.min(prev + 1, max)
+                return newCount
+            })
         } else {
-            if (countOfProduct > min) setCountOfProduct(countOfProduct - 1);
+            setCountOfProduct((prev) => {
+                const newCount = Math.max(prev - 1, min);
+                if (newCount === 0) {
+                    const previous = JSON.parse(localStorage.getItem("myBasket")) || [];
+                    const results = previous.filter(item => item.idNumberOfProduct !== idNumberOfProduct);
+                    localStorage.setItem("myBasket", JSON.stringify(results));
+                    setCommentOfSnackBar("این مورد از سبد خرید شما حذف شد");
+                    setShowSnackbar(true);
+
+
+                }
+                return newCount
+            })
+
+
         }
+
+
     };
+    const handleBasket = () => {
+
+        if (selectedColor && countOfProduct) {
+            const previous = JSON.parse(localStorage.getItem("myBasket")) || [];
+            if (previous.length === 0) {
+                localStorage.setItem("myBasket", JSON.stringify([{ idNumberOfProduct, selectedColor, countOfProduct }]))
+                setMyBasket({ idNumberOfProduct, selectedColor, countOfProduct });
+                setCommentOfSnackBar("یک مورد به سبد خرید شما اضافه شد")
+                setShowSnackbar(true);
+
+            } else {
+                const result = previous.findIndex((item) => {
+                    return item.idNumberOfProduct === idNumberOfProduct
+                })
+
+
+                if (result !== -1) {
+                    setCommentOfSnackBar("این محصول از قبل در سبد خرید شما وجود دارد")
+                    setShowSnackbar(true)
+
+                } else {
+                    localStorage.setItem("myBasket", JSON.stringify([...previous, { idNumberOfProduct, selectedColor, countOfProduct }]))
+                    setMyBasket({ idNumberOfProduct, selectedColor, countOfProduct });
+                    setCommentOfSnackBar("این محصول به سبد خرید شما اضافه شد")
+                    setShowSnackbar(true);
+                }
+            }
+
+
+        }
+    }
+
 
     return (
         <Box sx={{
             width: "100%",
-            height: "15vh",
+            height: "20vh",
             display: "flex",
             justifyContent: "center",
             flexDirection: "column",
             alignItems: "center",
-            gap: 2,
+
             position: { xs: "fixed", md: "static" },
-            bottom: { xs: 0, md: "auto" },
+            bottom: { xs: 1, md: "auto" },
             left: { xs: 0, md: "auto" },
             zIndex: 99,
-            backgroundColor: "white"
+            backgroundColor: "whitesmoke"
         }}>
             {/* انتخاب رنگ */}
             <Box sx={{
                 width: { xs: "80%", md: "100%" },
                 display: "flex",
-                justifyContent: "start",
-                alignItems: "center"
+                justifyContent: "center",
+                alignItems: "center",
+                mt: 1
             }}>
                 <FormGroup sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 1 }}>
                     {colors.map((color, index) => (
@@ -46,6 +102,7 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
                             key={index}
                             sx={{
                                 display: "inline-flex",
+
                                 cursor: "pointer",
                                 borderRadius: "50%",
                                 border: selectedColor === color ? "2px solid #000" : "2px solid transparent",
@@ -88,6 +145,7 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
                     <TextField
                         value={ChangeNumberToPersianForPhone(countOfProduct)}
                         variant="outlined"
+                        id="showBuyPart"
                         slotProps={{
                             input: {
                                 sx: {
@@ -113,6 +171,7 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
                 <Box sx={{ flexGrow: 10, py: 1 }}>
                     <Button disabled={countOfProduct === 0} variant="contained"
                         sx={{ backgroundColor: "tomato", color: "white", width: "100%" }}
+                        onClick={() => handleBasket()}
                     >
                         اضافه کردن
                     </Button>
@@ -124,6 +183,27 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
                         خرید
                     </Button>
                 </Box>
+            </Box>
+            <Box>
+                <Snackbar
+                    open={showSnackbar}
+                    autoHideDuration={2000}
+                    onClose={() => setShowSnackbar(false)}
+                    message={commentOfSnackBar}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                    slotProps={{
+                        root: {
+                            sx: {
+                                backgroundColor: "green",
+                            }
+                        },
+                        content: {
+                            sx: {
+                                backgroundColor: "green"
+                            }
+                        }
+                    }}
+                />
             </Box>
         </Box>
     );

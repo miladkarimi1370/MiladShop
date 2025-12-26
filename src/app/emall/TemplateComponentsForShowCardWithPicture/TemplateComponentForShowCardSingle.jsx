@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useTheShapeOfShowCards } from "@/store/useTheShapeOfShowCards";
 
 export default function TemplateComponentForShowCardSingle({ title, src, price, product_id }) {
-   
+
 
     const { currentColumnBase } = useTheShapeOfShowCards();
 
@@ -66,28 +66,28 @@ export default function TemplateComponentForShowCardSingle({ title, src, price, 
                                     <IconButton size="small" sx={{
                                         backgroundColor: "#fff", color: "grey", "&:hover": { color: "#fff", backgroundColor: "#000" }
                                     }} onClick={(e) => e.stopPropagation()}>
-                                        <FavoriteBorderRounded sx={{ transform: "scale(0.7)" }} />
+                                        <FavoriteBorderRounded sx={{ transform: "scale(0.5)" }} />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="دیدن جزئیات" placement="left-start">
                                     <IconButton size="small" sx={{
                                         backgroundColor: "#fff", color: "grey", "&:hover": { color: "#fff", backgroundColor: "#000" }
                                     }} onClick={(e) => { e.preventDefault(); e.stopPropagation(); router.push("/basket"); }}>
-                                        <ShoppingBasketOutlinedIcon sx={{ transform: "scale(0.7)" }} />
+                                        <ShoppingBasketOutlinedIcon sx={{ transform: "scale(0.5)" }} />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="دیدن سریع جزئیات" placement="left-start">
                                     <IconButton size="small" sx={{
                                         backgroundColor: "#fff", color: "grey", "&:hover": { color: "#fff", backgroundColor: "#000" }
                                     }} onClick={(e) => e.stopPropagation()}>
-                                        <SearchOutlined sx={{ transform: "scale(0.7)" }} />
+                                        <SearchOutlined sx={{ transform: "scale(0.5)" }} />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="مقایسه" placement="left-start">
                                     <IconButton size="small" sx={{
                                         backgroundColor: "#fff", color: "grey", "&:hover": { color: "#fff", backgroundColor: "#000" }
                                     }} onClick={(e) => e.stopPropagation()}>
-                                        <CompareArrowsRoundedIcon sx={{ transform: "scale(0.7)" }} />
+                                        <CompareArrowsRoundedIcon sx={{ transform: "scale(0.5)" }} />
                                     </IconButton>
                                 </Tooltip>
                             </Box>
@@ -96,7 +96,7 @@ export default function TemplateComponentForShowCardSingle({ title, src, price, 
                             <Typography variant="subtitle1" sx={{
                                 textAlign: "center",
                                 transition: "all linear 0.2s",
-                                color: "#000", fontSize: "14px", "&:hover": { color: "tomato" }
+                                color: "#000", fontSize: { xs: "12px", sm: "12px", md: "14px" }, "&:hover": { color: "tomato" }
                             }}>
                                 {title}
                             </Typography>

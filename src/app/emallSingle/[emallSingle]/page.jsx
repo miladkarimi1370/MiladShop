@@ -64,7 +64,7 @@ export default async function EMallSingle({ params }) {
                             colors={["green", "red", "blue", "pink"]}
                             min={0}
                             max={4}
-                            idNumberOfProduct={"123%234#"}
+                            idNumberOfProduct={myData[0].id}
                         />
                         <ShowInformation />
                     </Box>

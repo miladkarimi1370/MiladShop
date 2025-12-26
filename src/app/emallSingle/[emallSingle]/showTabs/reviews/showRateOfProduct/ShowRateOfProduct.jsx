@@ -44,14 +44,14 @@ export default function ShowRateOfProduct({ allReviews }) {
                                     value={starNumber}
                                     readOnly
                                     size="small"
-                                    sx={{ color: "#000", minWidth: 80 }}
+                                    sx={{ color: "#000", minWidth: "35%" }}
                                 />
 
                
                                 <LinearProgress
                                     variant="determinate"
                                     value={progressValue}
-                                    sx={{ height: 10, borderRadius: 5, bgcolor: "#cecece", width: "60%" }}
+                                    sx={{ height: 10, borderRadius: 5, bgcolor: "#cecece", width: "60%"  }}
                                 />
 
                 
