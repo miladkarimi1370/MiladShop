@@ -54,7 +54,7 @@ export default function ShowTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {rows?.map((row) => (
                         <StyledTableRow key={row.name}>
                             <StyledTableCell component="th" scope="row">
                                 {row.name}

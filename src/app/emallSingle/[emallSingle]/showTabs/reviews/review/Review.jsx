@@ -6,24 +6,6 @@ import { Avatar, Box, Button, Divider, Rating, Stack, Typography } from "@mui/ma
 export default function Review({ allReviews }) {
 
 
-    const reviews = [
-        {
-            name: "نازنین حمیدی",
-            avatar: "/images/avatar/1.png",
-            rating: 3,
-            date: [12, 8, 1404],
-            title: "خیلی عالی",
-            text: "جنسش خیلی عالیه من الان دو ماه که دارم ازش استفاده میکنم و خیلی راضی هستم ممنون از سایت خوب میلاد شاپ امیدوارم که موفق باشید و دیگر دوستان توصیه میکنم حتما از محصولات این فروشگاه دیدن کنید و خرید کنید"
-        },
-        {
-            name: "رامین محمدی",
-            avatar: "/images/avatar/3.png",
-            rating: 3,
-            date: [15, 8, 1404],
-            title: "خیلی عالی",
-            text: "جنسش خیلی عالیه من الان دو ماه که دارم ازش استفاده میکنم و خیلی راضی هستم ممنون از سایت خوب میلاد شاپ امیدوارم که موفق باشید و دیگر دوستان توصیه میکنم حتما از محصولات این فروشگاه دیدن کنید و خرید کنید"
-        }
-    ];
 
     return (
         <Box sx={{ flex: 3, py: 3 }}>
@@ -40,7 +22,7 @@ export default function Review({ allReviews }) {
             <Divider variant="fullWidth" />
 
             <Stack spacing={3} sx={{ py: 3 }}>
-                {allReviews.map((review, index) => (
+                {allReviews?.map((review, index) => (
                     <Box key={review.id} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                         <Box
                             sx={{
@@ -67,7 +49,7 @@ export default function Review({ allReviews }) {
                         </Box>
 
                         {/* Divider بعد از هر نظر */}
-                        {index < reviews.length - 1 && <Divider sx={{ mt: 2 }} />}
+                        {index < allReviews.length - 1 && <Divider sx={{ mt: 2 }} />}
                     </Box>
                 ))}
             </Stack>

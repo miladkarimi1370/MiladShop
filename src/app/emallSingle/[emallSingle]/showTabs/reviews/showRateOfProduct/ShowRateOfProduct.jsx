@@ -4,7 +4,7 @@ import { Box, LinearProgress, Rating, Stack, Typography } from "@mui/material";
 
 export default function ShowRateOfProduct({ allReviews }) {
     let votes = [0, 0, 0, 0, 0, 0]; // تعداد رای هر ستاره
-    console.log(allReviews);
+
     allReviews.forEach((element) => {
         votes[element.rate] += 1
     });
@@ -26,7 +26,7 @@ export default function ShowRateOfProduct({ allReviews }) {
                 </Box>
 
                 <Stack spacing={1} sx={{ width: "80%" }}>
-                    {votes.map((voteCount, index) => {
+                    {votes?.map((voteCount, index) => {
                         const starNumber =  index;
                         const progressValue = totalVotes > 0 ? (voteCount / totalVotes) * 100 : 0;
 

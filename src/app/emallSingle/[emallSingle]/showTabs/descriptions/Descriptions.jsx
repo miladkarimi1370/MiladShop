@@ -43,7 +43,7 @@ export default function Descriptions({ details, meterial, sizes, }) {
                                 جزئیات
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column", gap: 1, color: "grey" }}>
-                                {details.map((item, index) => {
+                                {details?.map((item, index) => {
                                     return (<Typography key={index} sx={{ fontSize: "14px" }}>{item}</Typography>)
                                 })}
 
@@ -65,7 +65,7 @@ export default function Descriptions({ details, meterial, sizes, }) {
                                 <Typography sx={{ fontSize: "16px", fontWeight: "bold", py: 1 }}>
                                     پوشش
                                 </Typography>
-                                {sizes.map((item, index) => {
+                                {sizes?.map((item, index) => {
                                     return (<Typography key={index} sx={{ fontSize: "14px", color: "grey" }}>{item}</Typography>)
                                 })}
 

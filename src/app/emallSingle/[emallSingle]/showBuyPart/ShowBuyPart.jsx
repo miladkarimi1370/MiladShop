@@ -100,7 +100,7 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
                 mt: 1
             }}>
                 <FormGroup sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 1 }}>
-                    {colors.map((color, index) => (
+                    {colors?.map((color, index) => (
                         <Box
                             key={index}
                             sx={{

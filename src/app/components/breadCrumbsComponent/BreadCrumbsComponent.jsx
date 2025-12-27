@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function BreadCrumbsComponents({ arrayOfPath }) {
 
 
-    const breadcrumbs = arrayOfPath.map((item) => {
+    const breadcrumbs = arrayOfPath?.map((item) => {
         return (
             <Link underline="hover" key={item.id} color="inherit" href={item.myHref} >
                 <Box
