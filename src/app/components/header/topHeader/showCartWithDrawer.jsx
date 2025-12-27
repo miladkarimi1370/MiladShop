@@ -5,6 +5,7 @@ import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded
 import { useEffect, useState } from "react";
 import { CartProduct } from "@/store/CardProduct";
 import ShowListItemOfProduct from "./ShowListItemOfProducts";
+import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
 
 
 export default function ShowCartWithDrawer({ color }) {
@@ -76,7 +77,7 @@ export default function ShowCartWithDrawer({ color }) {
     )
     return (
         <>
-            <Badge color="error" badgeContent={countOfBadge ?? 0}
+            <Badge color="error" badgeContent={ChangeNumberToPersianForPhone(countOfBadge) ?? ChangeNumberToPersianForPhone(0)}
                 showZero={countOfBadge === 0 ? true : false}
                 anchorOrigin={{
                     vertical: 'top',

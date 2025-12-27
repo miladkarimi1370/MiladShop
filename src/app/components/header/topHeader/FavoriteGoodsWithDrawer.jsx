@@ -1,11 +1,13 @@
 "use client";
-import { Box, Drawer, List, ListItemButton, ListItemIcon, Typography } from "@mui/material";
+import { Badge, Box, Drawer, List, ListItemButton, ListItemIcon, Typography } from "@mui/material";
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import { useState } from "react";
 import { CloseRounded } from "@mui/icons-material";
+import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
 export default function FavoriteGoodsWithDrawer({ color }) {
     const [open, setOpen] = useState(false);
 
+    
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen)
     }
@@ -44,18 +46,38 @@ export default function FavoriteGoodsWithDrawer({ color }) {
     )
     return (
         <Box component={"span"} sx={{ display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer" }}>
-            <FavoriteBorderRoundedIcon
-                onClick={toggleDrawer(true)}
-                sx={{
-                    color:  color , "&:hover": {
-                        color: "grey",
-                        transition: "all 0.4s"
-                    }
-                }} />
+            <Badge
+            color="success"
+                badgeContent={ChangeNumberToPersianForPhone(0)}
+                showZero
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+            >
+                <FavoriteBorderRoundedIcon
+                    sx={{
+                        color: color,
+                        marginInline: "0.5rem",
+                        fontSize: "23px",
 
-            <Drawer open={open} onClose={toggleDrawer(false)}>
+                        "&:hover": {
+                            color: "grey",
+                            cursor: "pointer",
+                            transition: "all 0.4s"
+                        }
+                    }}
+                    onClick={toggleDrawer(true)}
+                />
+            </Badge>
+
+            <Drawer open={open} onClose={toggleDrawer(false)} anchor="right" SlideProps={{
+                direction: "left"
+            }}>
                 {myDrawer}
             </Drawer>
         </Box>
     )
 }
+
+

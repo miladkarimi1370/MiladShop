@@ -1,6 +1,6 @@
 "use client";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { Box, Checkbox, Divider, FormControlLabel } from "@mui/material";
+import { Box, Checkbox, Divider, FormControlLabel, Snackbar } from "@mui/material";
 import PriorityHighRoundedIcon from '@mui/icons-material/PriorityHighRounded';
 import DirectionsBoatFilledOutlinedIcon from '@mui/icons-material/DirectionsBoatFilledOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
@@ -11,11 +11,72 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import Link from "next/link";
 import { Button, Typography } from "@mui/material";
-import { useState } from "react";
-import ChangeNumbersToPersina, { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
 
-export default function ShowInformation() {
-    const [isFavorite, setIsFavorite] = useState(false)
+import ChangeNumbersToPersina, { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
+import { FavoriteProducts } from "@/store/FavoriteProducts";
+import { useEffect, useState } from "react";
+
+export default function ShowInformation({ id, name, image, price }) {
+
+    const { myFavoriteProducts, setMyFavoriteProducts } = FavoriteProducts();
+    const [showSnackbar, setShowSnackbar] = useState(false);
+    const [commentOfSnackbar, setCommentOfSnackbar] = useState("");
+    const [currentChecked, setCurrentChecked] = useState(false);
+    const [bgColorOfSnackbar, setBgColorOfSnackbar] = useState("")
+    const getDataFromLocalStorage = () => {
+        const myF = JSON.parse(localStorage.getItem("myF")) || [];
+        return myF
+    }
+
+    useEffect(() => {
+        const myF = getDataFromLocalStorage();
+        let result;
+        if (myF.length > 0) {
+            result = myF.findIndex((item) => {
+                return item.id === id
+            })
+
+        }
+
+
+    }, [])
+
+    const handleClick = (id) => {
+        let myData = getDataFromLocalStorage();
+        if (myData.length === 0) {
+            setCurrentChecked(true)
+            localStorage.setItem("myF", JSON.stringify([{ id, name, price, image }]));
+            setMyFavoriteProducts([{ id, name, price, image }]);
+            setCommentOfSnackbar("یک محصول به علاقمندی های شما اضافه شد");
+            setBgColorOfSnackbar("green");
+            setShowSnackbar(true)
+        } else {
+            let result = myData.findIndex((item) => {
+                return item.id === id;
+            })
+            if (result !== -1) {
+                myData = myData.filter((item) => {
+                    return item.id !== id
+                })
+                localStorage.setItem("myF", JSON.stringify(myData));
+                setMyFavoriteProducts(myData);
+                setCurrentChecked(false);
+                setCommentOfSnackbar("این مورد از علاقمندی های شما حذف شد");
+                setBgColorOfSnackbar("red")
+                setShowSnackbar(true)
+            } else {
+                localStorage.setItem("myF", JSON.stringify([...myData, { id, name, price, image }]));
+                setMyFavoriteProducts([...myData, { id, name, price, image }]);
+                setCurrentChecked(true);
+                setCommentOfSnackbar("یک مورد به علاقمندی های شما اضافه شد");
+                setBgColorOfSnackbar("green")
+                setShowSnackbar(true)
+            }
+
+        }
+
+    }
+
     return (
         <>
             <Box sx={{ width: "100%" }}>
@@ -23,21 +84,21 @@ export default function ShowInformation() {
                     <FormControlLabel
                         control={
                             <Checkbox
-                                checked={isFavorite}          // حالت کنترل شده
-                                onChange={(e) => setIsFavorite(e.target.checked)} // بروزرسانی state
+                                checked={currentChecked}          // حالت کنترل شده
+                                onChange={() => handleClick(id)} // بروزرسانی state
                                 icon={<FavoriteBorder />}
                                 checkedIcon={<Favorite color="error" />}
-                                sx={{px : 1}}
+                                sx={{ px: 1 }}
                             />
                         }
                         slotProps={{
                             typography: {
-                                fontSize: "12px" , 
-                                
+                                fontSize: "12px",
+
                             }
                         }}
                         sx={{
-                            px : 2 ,
+                            px: 2,
                             transition: "all 0.3s",
                             "&:hover": {
                                 color: "tomato"
@@ -98,8 +159,8 @@ export default function ShowInformation() {
                 </Box>
                 <Divider />
                 <Box sx={{ py: 2, display: "flex", justifyContent: "start", alignItems: "center" }}>
-                    <Typography variant="subtitle2" sx={{ color: "#000", fontSize: "12px", fontWeight: "bold" , px : 2 }}>شبکه های اجتماعی : </Typography>
-                    <Box sx={{display : "flex" , justifyContent : "center" , gap : 1 , alignItems : "center"}}>
+                    <Typography variant="subtitle2" sx={{ color: "#000", fontSize: "12px", fontWeight: "bold", px: 2 }}>شبکه های اجتماعی : </Typography>
+                    <Box sx={{ display: "flex", justifyContent: "center", gap: 1, alignItems: "center" }}>
                         <InstagramIcon />
                         <WhatsAppIcon />
                         <TelegramIcon />
@@ -107,6 +168,27 @@ export default function ShowInformation() {
                         <YouTubeIcon />
                     </Box>
                 </Box>
+
+                <Snackbar
+                    open={showSnackbar}
+                    autoHideDuration={2000}
+                    onClose={() => setShowSnackbar(false)}
+                    message={commentOfSnackbar}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                    slotProps={{
+                        root: {
+                            sx: {
+                                backgroundColor: bgColorOfSnackbar,
+                            }
+                        },
+                        content: {
+                            sx: {
+                                backgroundColor: bgColorOfSnackbar
+                            }
+                        }
+                    }}
+                />
+
             </Box>
         </>
     )

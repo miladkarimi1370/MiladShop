@@ -72,7 +72,12 @@ export default async function EMallSingle({ params }) {
                             max={4}
                             idNumberOfProduct={myData[0].id}
                         />
-                        <ShowInformation />
+                        <ShowInformation
+                            id={myData[0].id}
+                            name={myData[0].name}
+                            price={myData[0].price}
+                            image={myData[0]["milad-shop-product-images"][0].image_url}
+                        />
                     </Box>
                 </Box>
 

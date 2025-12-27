@@ -13,6 +13,7 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
     const { myBasket, setMyBasket } = CartProduct();
     const [showSnackbar, setShowSnackbar] = useState(false)
     const [commentOfSnackBar, setCommentOfSnackBar] = useState("");
+    const [bgColorOfSnackbar, setBgColorOfSnackbar] = useState("")
 
 
 
@@ -31,6 +32,7 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
                     const results = previous.filter(item => item.idNumberOfProduct !== idNumberOfProduct);
                     localStorage.setItem("myBasket", JSON.stringify(results));
                     setCommentOfSnackBar("این مورد از سبد خرید شما حذف شد");
+                    setBgColorOfSnackbar("red")
                     setShowSnackbar(true);
 
 
@@ -50,7 +52,8 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
             if (previous.length === 0) {
                 localStorage.setItem("myBasket", JSON.stringify([{ idNumberOfProduct, selectedColor, countOfProduct, price, image, name }]))
                 setMyBasket({ idNumberOfProduct, selectedColor, countOfProduct, price, image, name });
-                setCommentOfSnackBar("یک مورد به سبد خرید شما اضافه شد")
+                setCommentOfSnackBar("یک مورد به سبد خرید شما اضافه شد");
+                setBgColorOfSnackbar("green")
                 setShowSnackbar(true);
 
             } else {
@@ -60,13 +63,15 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
 
 
                 if (result !== -1) {
-                    setCommentOfSnackBar("این محصول از قبل در سبد خرید شما وجود دارد")
+                    setCommentOfSnackBar("این محصول از قبل در سبد خرید شما وجود دارد");
+                    setBgColorOfSnackbar("brown")
                     setShowSnackbar(true)
 
                 } else {
                     localStorage.setItem("myBasket", JSON.stringify([...previous, { idNumberOfProduct, selectedColor, countOfProduct, price, image, name }]))
                     setMyBasket({ idNumberOfProduct, selectedColor, countOfProduct, price, image, name });
-                    setCommentOfSnackBar("این محصول به سبد خرید شما اضافه شد")
+                    setCommentOfSnackBar("این محصول به سبد خرید شما اضافه شد");
+                    setBgColorOfSnackbar("green")
                     setShowSnackbar(true);
                 }
             }
@@ -197,12 +202,12 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
                     slotProps={{
                         root: {
                             sx: {
-                                backgroundColor: "green",
+                                backgroundColor: bgColorOfSnackbar,
                             }
                         },
                         content: {
                             sx: {
-                                backgroundColor: "green"
+                                backgroundColor: bgColorOfSnackbar
                             }
                         }
                     }}
