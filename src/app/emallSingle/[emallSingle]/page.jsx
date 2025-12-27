@@ -28,6 +28,7 @@ export default async function EMallSingle({ params }) {
         .eq("id", emallSingle);
 
 
+
     const { count, data: reviewsData } = await supabase
         .from("reviews")
         .select(`
@@ -66,7 +67,7 @@ export default async function EMallSingle({ params }) {
                             image={myData[0]["milad-shop-product-images"][0].image_url}
                             name={myData[0].name}
                             price={myData[0].price}
-                            colors={["green", "red", "blue", "pink"]}
+                            colors={myData[0].colors}
                             min={0}
                             max={4}
                             idNumberOfProduct={myData[0].id}

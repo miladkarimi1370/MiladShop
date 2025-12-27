@@ -134,7 +134,7 @@ export default function ShowPictureInEmallSingle({ srcOfImages }) {
         alignItems: "center",
         my: { xs: 1, md: 0 }
       }}>
-        {srcOfImages.map((item, index) => (
+        {srcOfImages && srcOfImages.map((item, index) => (
           <Box
             key={item.id}
             component="img"
