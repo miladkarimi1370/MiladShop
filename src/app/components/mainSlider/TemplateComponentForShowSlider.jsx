@@ -135,7 +135,7 @@ export default function TemplateComponentForShowSlider({ sliders }) {
                                 </Typography>
 
                                 {/* 🔙 دکمه + متن + آیکن برگشت */}
-                                <Link href="/emall">
+                                <Link target="_blank" href="/emall">
                                     <Typography
                                         sx={{
                                             display: "flex",

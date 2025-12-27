@@ -32,6 +32,7 @@ import { usePriceFilter } from "@/store/usePriceFilter";
 import { useColorFilter } from "@/store/colorFilter";
 import { useBrandsFilter } from "@/store/useBrandsFilter";
 import { useSizeFilter } from "@/store/useSizeFilter";
+import NavigateUpButton from "../components/navigateUpButton/NavigateUpButton";
 
 
 export default function EMall() {
@@ -127,19 +128,19 @@ export default function EMall() {
             // شروع قسمت فیلتر کردن بر اساس قیمت
             switch (currentPriceFilter) {
                 case "less200":
-                    query = query.lt("price", 200);
+                    query = query.lt("price", 200000);
                     break;
                 case "200to399":
-                    query = query.gte("price", 200).lt("price", 400)
+                    query = query.gte("price", 200000).lt("price", 400000)
                     break;
                 case "400to599":
-                    query = query.gte("price", 400).lt("price", 600)
+                    query = query.gte("price", 400000).lt("price", 600000)
                     break;
                 case "600to899":
-                    query = query.gte("price", 600).lt("price", 900)
+                    query = query.gte("price", 600000).lt("price", 900000)
                     break;
                 case "more900":
-                    query = query.gte("price", 900)
+                    query = query.gte("price", 900000)
                     break;
 
             }
@@ -293,6 +294,7 @@ export default function EMall() {
                     </Box>
                 </Box>
             </Box>
+            <NavigateUpButton />
         </Container>
     );
 }

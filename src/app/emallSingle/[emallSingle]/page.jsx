@@ -11,6 +11,7 @@ import InfoBeforeBuyWithTitle from "./inforBeforeBuyWithTitle/InfoBeforeBuyWithT
 import BreadCrumbsComponents from "@/app/components/breadCrumbsComponent/BreadCrumbsComponent";
 import { supabase } from "@/utils/supabaseKey";
 import { calcualteAvgRate } from "@/tools/calculateAvgRate";
+import NavigateUpButton from "@/app/components/navigateUpButton/NavigateUpButton";
 
 export default async function EMallSingle({ params }) {
     const { emallSingle } = await params;
@@ -83,6 +84,7 @@ export default async function EMallSingle({ params }) {
 
                 <InfoBeforeBuyWithTitle />
             </Box>
+            <NavigateUpButton />
         </Container>
     );
 }

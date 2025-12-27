@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer";
 import theme from "./theme/theme";
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
+
 const vazirmatn = Vazirmatn({
   subsets: ["arabic"],
   weight: ["400", "500", "700"],

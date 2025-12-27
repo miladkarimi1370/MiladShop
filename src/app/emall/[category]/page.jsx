@@ -1,4 +1,5 @@
 
+import NavigateUpButton from "@/app/components/navigateUpButton/NavigateUpButton";
 import ShowProductsAsClientComponent from "./ShowProductsAsClientComponent";
 
 
@@ -10,7 +11,7 @@ export default async function MyCategory({ params, searchParams }) {
     return (
         <>
             <ShowProductsAsClientComponent category={category} />
-
+            <NavigateUpButton />
         </>
     )
 }
