@@ -12,17 +12,17 @@ import TemplateComponentForShowImageOfBlog from "./TemplateComponentForShowImage
 
 export default function TemplateComponentBlogMenu({ myTitle }) {
     const infoBlogs = [
-        { id: 1, title: "استایل تابستانی", desHref: "" },
-        { id: 2, title: "استایل زمستانی", desHref: "" },
-        { id: 3, title: "استایل پائیزه", desHref: "" },
-        { id: 4, title: "استایل بهاری", desHref: "" },
-        { id: 5, title: "ترکیب هودی و شلوار بگ", desHref: "" },
+        { id: 1, title: "استایل تابستانی", desHref: "/emall/men" },
+        { id: 2, title: "استایل زمستانی", desHref: "/emall/women" },
+        { id: 3, title: "استایل پائیزه", desHref: "/emall/men" },
+        { id: 4, title: "استایل بهاری", desHref: "/emall/men" },
+        { id: 5, title: "ترکیب هودی و شلوار بگ", desHref: "/emall/women" },
 
     ]
     const infoBlogsWithImg = [
-        { id: 1, title: "ترکیب رنگ های روشن", myHref: "", imgSrc: "/images/womenPictureForShopMenu.jpg", dayAndMonth: "بیست و دوم مهر", year: "1404" },
-        { id: 2, title: "ترکیب رنگ های تیره", myHref: "", imgSrc: "/images/productNavbarImages/boy.jpg", dayAndMonth: "سوم آبان", year: "1404" },
-        { id: 3, title: "ترکیب رنگ های پاستیلی", myHref: "", imgSrc: "/images/productNavbarImages/thirdGirl.jpg", dayAndMonth: "هشتم مهر", year: "1404" },
+        { id: 1, title: "ترکیب رنگ های روشن", myHref: "/emall/men", imgSrc: "/images/womenPictureForShopMenu.jpg", dayAndMonth: "بیست و دوم مهر", year: "1404" },
+        { id: 2, title: "ترکیب رنگ های تیره", myHref: "/emall/women", imgSrc: "/images/productNavbarImages/boy.jpg", dayAndMonth: "سوم آبان", year: "1404" },
+        { id: 3, title: "ترکیب رنگ های پاستیلی", myHref: "/emall/women", imgSrc: "/images/productNavbarImages/thirdGirl.jpg", dayAndMonth: "هشتم مهر", year: "1404" },
 
     ]
     const { myAnchorEl, myActiveMenu, myHandleClose, openMenu } = useMenuStore();

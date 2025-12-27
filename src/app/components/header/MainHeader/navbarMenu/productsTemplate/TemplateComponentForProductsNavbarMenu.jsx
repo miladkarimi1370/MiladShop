@@ -21,15 +21,15 @@ export default function TemplateComponentForProductsNavbarMenu({ myTitle }) {
         {
             subHeader: "کالکشن بهاره",
             subSubHeaders: [
-                { id: 1, title: "شلوار زنانه نخی", myHref: "" },
-                { id: 2, title: "پیراهن نخی زنانه ", myHref: "" },
-                { id: 3, title: "لباس راحتی", myHref: "" },
-                { id: 4, title: "تاپ و کراپ", myHref: "" },
+                { id: 1, title: "شلوار زنانه نخی", myHref: "/emall/women" },
+                { id: 2, title: "پیراهن نخی زنانه ", myHref: "/emall/women" },
+                { id: 3, title: "لباس راحتی", myHref: "/emall/women" },
+                { id: 4, title: "تاپ و کراپ", myHref: "/emall/women" },
 
-                { id: 5, title: "تی شرت ", myHref: "" },
-                { id: 6, title: "پیراهن نخی", myHref: "" },
-                { id: 7, title: "کلاه ورزشی", myHref: "" },
-                { id: 8, title: "کفش و کتانی", myHref: "" },
+                { id: 5, title: "تی شرت ", myHref: "/emall/men" },
+                { id: 6, title: "پیراهن نخی", myHref: "/emall/men" },
+                { id: 7, title: "کلاه ورزشی", myHref: "/emall/hat" },
+                { id: 8, title: "کفش و کتانی", myHref: "/emall/sneakers" },
 
 
             ]
@@ -37,19 +37,19 @@ export default function TemplateComponentForProductsNavbarMenu({ myTitle }) {
         {
             subHeader: "کالکشن تابستان",
             subSubHeaders: [
-                { id: 1, title: "تی شرت مردانه", myHref: "" },
-                { id: 2, title: "تاپ و کراپ زنانه ", myHref: "" },
-                { id: 3, title: "مانتو نخی زنانه", myHref: "" },
+                { id: 1, title: "تی شرت مردانه", myHref: "/emall/men" },
+                { id: 2, title: "تاپ و کراپ زنانه ", myHref: "/emall/women" },
+                { id: 3, title: "مانتو نخی زنانه", myHref: "/emall/women_jacket" },
                 { id: 4, title: "اسکارف", myHref: "" },
             ]
         },
         {
             subHeader: "کالکشن زمستان",
             subSubHeaders: [
-                { id: 1, title: "کاپشن مردانه", myHref: "" },
-                { id: 2, title: "پالتو زنانه ", myHref: "" },
-                { id: 3, title: "کاپشن زنانه", myHref: "" },
-                { id: 4, title: "کلاه و دستکش چرمی", myHref: "" },
+                { id: 1, title: "کاپشن مردانه", myHref: "/emall/men" },
+                { id: 2, title: "پالتو زنانه ", myHref: "/emall/women_jacket" },
+                { id: 3, title: "کاپشن زنانه", myHref: "/emall/women_jacket" },
+                { id: 4, title: "کلاه و دستکش چرمی", myHref: "/emall/hat" },
             ]
         },
     ]
@@ -90,7 +90,7 @@ export default function TemplateComponentForProductsNavbarMenu({ myTitle }) {
                     anchorEl={myAnchorEl}
                     placement="bottom-start"
                     modifiers={[{ name: "offset", options: { offset: [0, 6] } },
-                
+
                     {
                         name: "zIndex",
                         enabled: true,
@@ -125,8 +125,8 @@ export default function TemplateComponentForProductsNavbarMenu({ myTitle }) {
                                     height: "450px",
                                     transform: isOpen ? "translateY(-13px)" : "translateY(-10px)",
                                     transition: "transform .25s ease",
-                                    p: 1 , 
-                                    
+                                    p: 1,
+
                                 }}
                             >
                                 <Box

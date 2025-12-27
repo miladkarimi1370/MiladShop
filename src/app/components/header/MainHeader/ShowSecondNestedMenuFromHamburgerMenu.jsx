@@ -6,25 +6,25 @@ import { ListItemText, MenuItem, MenuList, Paper, Popper, Fade } from "@mui/mate
 export default function ShowSecondNestedMenuFromHamburgerMenu({ desAncho, part, open }) {
     const parts = {
         part1: [
-            { id: 1, title: "مردانه", href: "" },
-            { id: 2, title: "زنانه", href: "" },
-            { id: 3, title: "کفش و کتانی", href: "" },
-            { id: 4, title: "لباس زیر", href: "" },
-            { id: 5, title: "اکسسوری", href: "" },
+            { id: 1, title: "مردانه", href: "/emall/men" },
+            { id: 2, title: "زنانه", href: "/emall/women" },
+            { id: 3, title: "کفش و کتانی", href: "/emall/sneakers" },
+            { id: 4, title: "لباس زیر", href: "/emall/women" },
+            { id: 5, title: "اکسسوری", href: "/emall/accessory" },
         ],
         part2: [
-            { id: 1, title: "تی شرت", href: "" },
-            { id: 2, title: "سوئیشرت", href: "" },
-            { id: 3, title: "شلوار", href: "" },
-            { id: 4, title: "عینک", href: "" },
-            { id: 5, title: "ساعت", href: "" },
+            { id: 1, title: "تی شرت", href: "/emall/men" },
+            { id: 2, title: "سوئیشرت", href: "/emall/men" },
+            { id: 3, title: "شلوار", href: "/emall/trouser" },
+            { id: 4, title: "عینک", href: "/emall/accessory" },
+            { id: 5, title: "ساعت", href: "/emall/accessory" },
         ],
         part3: [
-            { id: 1, title: "شومیز و پیراهن", href: "" },
-            { id: 2, title: "عینک", href: "" },
-            { id: 3, title: "کیف و کوله پشتی", href: "" },
-            { id: 4, title: "صندل", href: "" },
-            { id: 5, title: "اکسسوری", href: "" },
+            { id: 1, title: "شومیز و پیراهن", href: "/emall/women" },
+            { id: 2, title: "عینک", href: "/emall/accessory" },
+            { id: 3, title: "کیف و کوله پشتی", href: "/emall/bag" },
+            { id: 4, title: "صندل", href: "/emall/sneakers" },
+            { id: 5, title: "اکسسوری", href: "/emall/accessory" },
         ],
     };
 

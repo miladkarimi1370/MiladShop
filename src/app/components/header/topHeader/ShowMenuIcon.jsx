@@ -41,7 +41,7 @@ export default function ShowMenuIcon() {
     const DrawerList = (
         <Box role="presentation" sx={{
             width: 350, height: "100vh", display: {
-              sm : "block" , md: "none"
+                sm: "block", md: "none"
             }
         }}>
             <List
@@ -61,7 +61,7 @@ export default function ShowMenuIcon() {
 
                 <ListItemButton
                     component={NextLink}
-                    href=''
+                    href='/'
                     sx={{
 
                         "&:hover": {
@@ -77,7 +77,7 @@ export default function ShowMenuIcon() {
                 </ListItemButton>
                 <ListItemButton
                     component={NextLink}
-                    href=''
+                    href="/emall"
                     sx={{
 
                         "&:hover": {
@@ -94,7 +94,7 @@ export default function ShowMenuIcon() {
                 {/* شروع اولین لیست آیتم به همراه collapse مربوط به خودش */}
                 <ListItemButton
                     onClick={() => handleOpenSubMenu("subMenu1")}
-
+                    href='/emall'
                     sx={{
 
                         "&:hover": {

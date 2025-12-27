@@ -100,8 +100,8 @@ export default function TemplateComponentForHomeNavbarMenu({ myTitle }) {
                         {
                             name: "zIndex",
                             enabled: true,
-                            phase : "write" ,
-                            fn : ({state}) => {
+                            phase: "write",
+                            fn: ({ state }) => {
                                 state.styles.popper.zIndex = 2000
                             }
                         }
@@ -135,7 +135,7 @@ export default function TemplateComponentForHomeNavbarMenu({ myTitle }) {
                                     height: "400px",
                                     transform: "translateY(-13px)",
                                     p: 2,
-                                    
+
                                 }}
                             >
                                 <List disablePadding sx={{
@@ -145,7 +145,7 @@ export default function TemplateComponentForHomeNavbarMenu({ myTitle }) {
                                 }}>
                                     {HomeMenuNavbar.map((item) => {
                                         return (
-                                            <TemplateComponentForSubMenuInNavbarMenu key={item.id} text={item.title} myHref={item.desHref} />
+                                            <TemplateComponentForSubMenuInNavbarMenu key={item.id} text={item.title} myHref={"/"} />
                                         )
                                     })}
                                     {/* این قسمت خانه منوی ناوبری بود باید بقیه موارد رو هم پیاده کرد */}
