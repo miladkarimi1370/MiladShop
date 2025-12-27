@@ -43,6 +43,7 @@ export default async function EMallSingle({ params }) {
 
 
 
+
     const result = calcualteAvgRate(reviewsData);
 
 
@@ -61,6 +62,9 @@ export default async function EMallSingle({ params }) {
                         <ShowRating rate={result} electedCount={count} />
                         <ShowTitle title={myData[0].name} price={myData[0].price} description={myData[0].descriptions} />
                         <ShowBuyPartWhenMdDown
+                            image={myData[0]["milad-shop-product-images"][0].image_url}
+                            name={myData[0].name}
+                            price={myData[0].price}
                             colors={["green", "red", "blue", "pink"]}
                             min={0}
                             max={4}

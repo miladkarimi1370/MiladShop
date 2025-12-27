@@ -2,19 +2,42 @@
 import { AddShoppingCart, CloseRounded } from "@mui/icons-material";
 import { Badge, Box, Drawer, List, ListItemButton, ListItemIcon, Typography } from "@mui/material";
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { CartProduct } from "@/store/CardProduct";
+import ShowListItemOfProduct from "./ShowListItemOfProducts";
+
 
 export default function ShowCartWithDrawer({ color }) {
     const [openCart, setOpenCart] = useState(false);
+    const { myBasket, setMyBasket } = CartProduct();
+    const [currentProducts, setCurrentProducts] = useState([])
+    const [countOfBadge, setCountOfBadge] = useState(0)
     const toggleDrawerForCart = (newOpen) => () => {
         setOpenCart(newOpen);
     }
 
+    const getDataFromLocalStorage = () => {
+        const myProducts = JSON.parse(localStorage.getItem("myBasket"));
+        return myProducts
+    }
+
+    useEffect(() => {
+        const products = getDataFromLocalStorage() || [];
+
+        setCurrentProducts(products)
+
+
+        setCountOfBadge(products.length)
+
+    }, [openCart, myBasket])
+
+
+
     const CartDrawer = (
         <Box
             role="presentation" sx={{
-                width: 400, height: "100vh",
-       
+                width: { xs: 400, sm: 400, md: 500 }, height: "100vh",
+
             }}
         >
             <List >
@@ -34,30 +57,38 @@ export default function ShowCartWithDrawer({ color }) {
                     </ListItemIcon>
                 </ListItemButton>
             </List>
-            <Box sx={{ height: "90vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Box sx={{ width: "100%", display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
-                    <ShoppingBasketRoundedIcon sx={{ color: "#cecece", fontSize: "100px", width: "100%" }} />
-                    <Typography variant="body2" color="#cecece">سبد خرید شما خالی است</Typography>
+            <Box sx={{ height: "90vh", display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
+                <Box sx={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", gap: 1, flexDirection: "column" }}>
+                    <Box component="img" src="/images/logo.png" width={70} height={70} />
+                    <Typography variant="h2" sx={{ fontSize: "14px", color: "black", fontWeight: "bold" }}>سبد محصولات</Typography>
                 </Box>
+
+                {currentProducts.length > 0 ? <ShowListItemOfProduct allProducts={currentProducts} changeallProducts={setCurrentProducts} /> : (
+                    <Box sx={{ width: "100%", display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
+                        <ShoppingBasketRoundedIcon sx={{ color: "#cecece", fontSize: "100px", width: "100%" }} />
+                        <Typography variant="body2" color="#cecece">سبد خرید شما خالی است</Typography>
+                    </Box>
+                )}
+
             </Box>
 
         </Box>
     )
     return (
         <>
-            <Badge color="error" badgeContent={0}
-                showZero
+            <Badge color="error" badgeContent={countOfBadge ?? 0}
+                showZero={countOfBadge === 0 ? true : false}
                 anchorOrigin={{
                     vertical: 'top',
-                    horizontal: 'left',
+                    horizontal: 'right',
                 }}
             >
                 <AddShoppingCart
                     sx={{
-                        color:  color ,
+                        color: color,
                         marginInline: "0.5rem",
-                        fontSize : "23px" ,
-                 
+                        fontSize: "23px",
+
                         "&:hover": {
                             color: "grey",
                             cursor: "pointer",
@@ -67,7 +98,9 @@ export default function ShowCartWithDrawer({ color }) {
                     onClick={toggleDrawerForCart(true)}
                 />
             </Badge>
-            <Drawer open={openCart} onClose={toggleDrawerForCart(false)}>
+            <Drawer open={openCart} onClose={toggleDrawerForCart(false)} anchor="right" SlideProps={{
+                direction: "left"
+            }}>
                 {CartDrawer}
             </Drawer>
         </>

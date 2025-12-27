@@ -7,12 +7,15 @@ import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { ChangeNumberToPersianForPhone } from "@/tools/changeNumbersToPersian";
 import { CartProduct } from "@/store/CardProduct";
 
-export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProduct }) {
+export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProduct, price, image, name }) {
     const [selectedColor, setSelectedColor] = useState(null);
     const [countOfProduct, setCountOfProduct] = useState(0);
     const { myBasket, setMyBasket } = CartProduct();
     const [showSnackbar, setShowSnackbar] = useState(false)
-    const [commentOfSnackBar, setCommentOfSnackBar] = useState("")
+    const [commentOfSnackBar, setCommentOfSnackBar] = useState("");
+
+
+
     const handleClicked = (sign) => {
 
         if (sign === "Plus") {
@@ -45,8 +48,8 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
         if (selectedColor && countOfProduct) {
             const previous = JSON.parse(localStorage.getItem("myBasket")) || [];
             if (previous.length === 0) {
-                localStorage.setItem("myBasket", JSON.stringify([{ idNumberOfProduct, selectedColor, countOfProduct }]))
-                setMyBasket({ idNumberOfProduct, selectedColor, countOfProduct });
+                localStorage.setItem("myBasket", JSON.stringify([{ idNumberOfProduct, selectedColor, countOfProduct, price, image, name }]))
+                setMyBasket({ idNumberOfProduct, selectedColor, countOfProduct, price, image, name });
                 setCommentOfSnackBar("یک مورد به سبد خرید شما اضافه شد")
                 setShowSnackbar(true);
 
@@ -61,8 +64,8 @@ export default function ShowBuyPartWhenMdDown({ min, max, colors, idNumberOfProd
                     setShowSnackbar(true)
 
                 } else {
-                    localStorage.setItem("myBasket", JSON.stringify([...previous, { idNumberOfProduct, selectedColor, countOfProduct }]))
-                    setMyBasket({ idNumberOfProduct, selectedColor, countOfProduct });
+                    localStorage.setItem("myBasket", JSON.stringify([...previous, { idNumberOfProduct, selectedColor, countOfProduct, price, image, name }]))
+                    setMyBasket({ idNumberOfProduct, selectedColor, countOfProduct, price, image, name });
                     setCommentOfSnackBar("این محصول به سبد خرید شما اضافه شد")
                     setShowSnackbar(true);
                 }
