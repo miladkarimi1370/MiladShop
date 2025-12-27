@@ -8,7 +8,7 @@ export default function ShowLoginOrRegisterIcon({ color }) {
         <>
             <Box
                 component={NextLink} sx={{ display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", m: 1 }}
-                href={""}
+                href={"/login"}
             >
                 <PersonOutlineOutlinedIcon
 
