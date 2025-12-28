@@ -1,5 +1,5 @@
 "use client";
-import { Box, Container, Divider, TextField } from "@mui/material";
+import { Box, Container, Divider, Snackbar, TextField } from "@mui/material";
 import ShowLogo from "@/app/components/header/topHeader/ShowLogo";
 import ShowCartWithDrawer from "@/app/components/header/topHeader/showCartWithDrawer";
 import ShowMenuIcon from "@/app/components/header/topHeader/ShowMenuIcon";
@@ -14,34 +14,49 @@ import ShowCallInfo from "./topHeader/ShowCallInfo";
 import ShowBigLogo from "./topHeader/ShowBigLogo";
 import { useEffect, useState } from "react";
 import IfLogInWeb from "./topHeader/IfLogInWeb";
-import { supabase } from "@/utils/supabaseKey";
+
 
 
 
 
 export default function MyTopHeader() {
     const [isLoged, setIsLoged] = useState(false);
-    const [infoOfPerson, setInfoOfPerson] = useState("")
-    useEffect(() => {
+    const [infoOfPerson, setInfoOfPerson] = useState(null);
+    const [commentOfSnackbar, setCommentOfSnackbar] = useState("");
+    const [bgColorOfSnackbar, setBgColorOfSnackbar] = useState("");
+    const [showSnackbar, setShowSnackbar] = useState(false)
+    const getDataFromLocalStrorage = () => {
         const person = JSON.parse(localStorage.getItem("person_log"));
-        if (!person) {
-            setIsLoged(false);
-            setInfoOfPerson("")
-            return
+        return person
+    }
+    useEffect(() => {
+        const loadUser = () => {
+            const person = getDataFromLocalStrorage();
+            console.log(person);
+            if (!person || person === null) {
+                setIsLoged(false);
+                setInfoOfPerson(null);
+                setShowSnackbar(false)
+                return;
+            } else {
+                setInfoOfPerson(person);
+                setIsLoged(true);
+                setCommentOfSnackbar(`${person.full_name} عزیز خوش آمدید`);
+                setBgColorOfSnackbar("green");
+                setShowSnackbar(true)
+            }
         }
-        setInfoOfPerson(person)
-        setIsLoged(true);
+        loadUser();
 
+        window.addEventListener("storage", loadUser);
+        window.addEventListener("focus", loadUser);
 
         return () => {
-            supabase
-                .from("milad-shop-customers")
-                .update({ user_id: null })
-                .eq("email", infoOfPerson.email);
-            setInfoOfPerson("");
-            infoOfPerson(false);
-
+            window.removeEventListener("storage", loadUser);
+            window.removeEventListener("focus", loadUser)
         }
+
+
     }, [])
 
     return (
@@ -139,6 +154,25 @@ export default function MyTopHeader() {
                         <ShowBigLogo />
                     </Box>
                 </Box>
+                <Snackbar
+                    open={showSnackbar}
+                    autoHideDuration={2000}
+                    onClose={() => setShowSnackbar(false)}
+                    message={commentOfSnackbar}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                    slotProps={{
+                        root: {
+                            sx: {
+                                backgroundColor: bgColorOfSnackbar,
+                            }
+                        },
+                        content: {
+                            sx: {
+                                backgroundColor: bgColorOfSnackbar
+                            }
+                        }
+                    }}
+                />
             </Container>
             <Divider sx={{ opacity: "0.6" }} />
             {/* پایان قسمت هدری که در پائین تاپ هدر است در زمانی که عرض بیشتر از ام دی است همونی که بکگراند مشکی نداره */}

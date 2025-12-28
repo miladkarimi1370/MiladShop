@@ -49,10 +49,14 @@ export default function Login() {
 
         localStorage.setItem("person_log", JSON.stringify(existing))
 
+        window.dispatchEvent(new StorageEvent("storage", {
+            key: "person_log",
+            newValue: JSON.stringify(existing),
+            // oldValue اختیاریه
+        }));
 
-        setTimeout(() => {
-            router.push("/")
-        }, 1500);
+
+        router.push("/")
 
 
     }
@@ -61,11 +65,11 @@ export default function Login() {
     const onSubmit = async (data) => {
 
         try {
-            const token = recaptchaRef.current.getValue();
-            if (!token) {
-                alert("لطفا تائید ربات را انجام دهید");
-                return;
-            }
+            // const token = recaptchaRef.current.getValue();
+            // if (!token) {
+            //     alert("لطفا تائید ربات را انجام دهید");
+            //     return;
+            // }
 
 
             const { data: loginData, error } = await supabase.auth.signInWithPassword({
@@ -81,7 +85,7 @@ export default function Login() {
                 return
             }
 
-         
+
             setCommentOfSnackBar("ورود موفقیت آمیز بود");
             setBgColorOfSnackBar("green");
             setShowSnackBar(true)
@@ -99,6 +103,7 @@ export default function Login() {
     return (
         <>
             <Box sx={{
+                position: "relative",
                 background: "#283048", background: "-webkit-linear-gradient(to right, #859398, #283048)", background: "linear-gradient(to right, #859398, #283048)", width: "100%",
                 height: { xs: "85vh", lg: "82vh" }
             }}>
@@ -210,7 +215,7 @@ export default function Login() {
                                     <Checkbox {...register("remember_me")} defaultChecked />
                                 </Box>
                                 <Divider flexItem sx={{ width: "80%", alignSelf: "center" }} />
-                                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "70%" }}>
+                                {/* <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "70%" }}>
                                     <Typography variant="caption" sx={{ color: "grey", fontSize: "12px", width: "30%" }}>اعتبار سنجی گوگل :</Typography>
 
                                     <ReCAPTCHA
@@ -219,7 +224,7 @@ export default function Login() {
                                         size={isMobile ? "compact" : "normal"}
                                     />
 
-                                </Box>
+                                </Box> */}
                                 <Divider flexItem sx={{ width: "80%", alignSelf: "center" }} />
                                 <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
                                     <Button variant="contained" color="success" fullWidth sx={{ width: "80%" }} type="submit">ورود</Button>
@@ -258,7 +263,12 @@ export default function Login() {
                         }}
                     />
                 </Container>
+                <Box sx={{ position: "fixed", display: "flex", justifyContent: "center", gap : 2, alignItems: "end" , bottom : "50px" , flexDirection : "column" , right : "100px" , bgcolor : "tomato" , borderRadius : "100px" , p : 2 }}>
+                    <Typography variant="body1" sx={{ color: "white", fontSize: "14px" }}>ایمیل : milad@gmail.com</Typography>
+                    <Typography variant="body2" sx={{ color: "whitesmoke", fontSize: "14px" }}>رمز عبور :  123456789Milad</Typography>
+                </Box>
             </Box >
+
         </>
     )
 }

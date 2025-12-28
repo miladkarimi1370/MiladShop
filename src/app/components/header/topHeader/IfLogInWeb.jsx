@@ -4,8 +4,11 @@ import { Avatar, Box, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 // import NextLink from "next/link";
 import { useState } from "react";
+import { supabase } from "@/utils/supabaseKey";
+import { useRouter } from "next/navigation";
 export default function IfLogInWeb({ personData }) {
     const [anchorEl, setAnchorEl] = useState(null);
+    const route = useRouter();
     console.log(personData);
     const handleClose = () => {
         setAnchorEl(null);
@@ -14,6 +17,36 @@ export default function IfLogInWeb({ personData }) {
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
+    };
+
+    const handleLogOut = async () => {
+        try {
+            if (!personData?.email) {
+                console.log("ایمیل کاربر موجود نیست!");
+                return;
+            }
+
+            const { data, error } = await supabase
+                .from("milad-shop-customers")
+                .update({ user_id: null })  // <-- فقط یک آبجکت
+                .eq("email", personData.email);
+
+            if (error) {
+                console.error("خطا در آپدیت دیتابیس:", error.message);
+                return;
+            }
+
+            console.log("user_id با موفقیت پاک شد:", data);
+
+            // پاک کردن localStorage اگر داری
+            localStorage.removeItem("person_log");
+
+            // رفرش صفحه یا ریدایرکت
+            route.refresh();
+
+        } catch (err) {
+            console.error("خطای غیرمنتظره:", err);
+        }
     };
 
     return (
@@ -98,7 +131,7 @@ export default function IfLogInWeb({ personData }) {
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>
-                    <Typography variant="subtitle1" component={"span"} sx={{ fontSize: "12px" }}>خروج </Typography>
+                    <Typography variant="caption" component={"span"} onClick={() => handleLogOut()} sx={{ fontSize: "12px" }}>خروج </Typography>
                 </MenuItem>
 
 
