@@ -5,11 +5,11 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 // import NextLink from "next/link";
 import { useState } from "react";
 import { supabase } from "@/utils/supabaseKey";
-import { useRouter } from "next/navigation";
+
 export default function IfLogInWeb({ personData }) {
     const [anchorEl, setAnchorEl] = useState(null);
-    const route = useRouter();
-    console.log(personData);
+  
+    
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -36,13 +36,17 @@ export default function IfLogInWeb({ personData }) {
                 return;
             }
 
-            console.log("user_id با موفقیت پاک شد:", data);
 
-            // پاک کردن localStorage اگر داری
+
+
             localStorage.removeItem("person_log");
-
-            // رفرش صفحه یا ریدایرکت
-            route.refresh();
+            window.dispatchEvent(new StorageEvent("storage", {
+                key: "person_log",
+                newValue: null,
+                oldValue: JSON.stringify(personData)
+            }));
+            handleClose();
+     
 
         } catch (err) {
             console.error("خطای غیرمنتظره:", err);
@@ -136,7 +140,7 @@ export default function IfLogInWeb({ personData }) {
 
 
             </Menu>
-
+   
         </>
     )
 }
