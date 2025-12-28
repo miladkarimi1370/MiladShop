@@ -41,3 +41,25 @@ a {
     color-scheme: dark;
   }
 }
+
+/* app/globals.css یا هر فایل CSS گلوبال دیگه */
+
+html {
+  overflow-y: scroll;
+  /* همیشه اسکرول‌بار عمودی رو نشون بده */
+}
+
+/* اختیاری: اسکرول‌بار رو قشنگ‌تر کن (برای وب‌کیت) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 20px;
+  border: transparent;
+}

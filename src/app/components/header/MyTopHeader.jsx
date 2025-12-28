@@ -12,11 +12,38 @@ import ShowLoginOrRegisterIcon from "./topHeader/ShowLoginOrRegisterIcon";
 import ShowCallInfo from "./topHeader/ShowCallInfo";
 
 import ShowBigLogo from "./topHeader/ShowBigLogo";
+import { useEffect, useState } from "react";
+import IfLogInWeb from "./topHeader/IfLogInWeb";
+import { supabase } from "@/utils/supabaseKey";
 
 
 
 
 export default function MyTopHeader() {
+    const [isLoged, setIsLoged] = useState(false);
+    const [infoOfPerson, setInfoOfPerson] = useState("")
+    useEffect(() => {
+        const person = JSON.parse(localStorage.getItem("person_log"));
+        if (!person) {
+            setIsLoged(false);
+            setInfoOfPerson("")
+            return
+        }
+        setInfoOfPerson(person)
+        setIsLoged(true);
+
+
+        return () => {
+            supabase
+                .from("milad-shop-customers")
+                .update({ user_id: null })
+                .eq("email", infoOfPerson.email);
+            setInfoOfPerson("");
+            infoOfPerson(false);
+
+        }
+    }, [])
+
     return (
         <>
             {/* شروع قسمت تاپ هدر در زمانی که عرض پائین تر از ام دی است  */}
@@ -90,7 +117,8 @@ export default function MyTopHeader() {
                     >
                         <ShowCartWithDrawer color={"black"} />
                         <FavoriteGoodsWithDrawer color={"black"} />
-                        <ShowLoginOrRegisterIcon color={"black"} />
+                        {isLoged ? <IfLogInWeb personData={infoOfPerson} /> : <ShowLoginOrRegisterIcon color={"black"} />}
+
                     </Box>
                     <Divider orientation="vertical" variant="middle" flexItem sx={{ opacity: "0.6" }} />
                     <Box
